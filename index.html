@@ -817,7 +817,7 @@ bank.addEventListener('touchstart',function(){
 });
     for(var i= 0,len=bank_list.length;i<len;i++){
         (function(i){
-            bank_list[i].addEventListener('touchstart',function(){
+            bank_list[i].addEventListener('click',function(){
 //                for(var j= 0;j<len;j++){
 //                    if(j===i){
                         a=i;
@@ -834,11 +834,11 @@ bank.addEventListener('touchstart',function(){
             })
         })(i)
     }
-shot_box_close.addEventListener('touchstart',function(){
+shot_box_close.addEventListener('click',function(){
     addClass(shot_box,'disNo');
     removeClass(bank_list[a],'bgG7');
 })
-shot_box_true.addEventListener('touchstart',function(){
+shot_box_true.addEventListener('click',function(){
     bank_name.innerHTML=b;
     bank_text.innerHTML=c;
     setCss(bank_layer,'display','none');
