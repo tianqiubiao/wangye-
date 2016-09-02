@@ -817,20 +817,23 @@ bank.addEventListener('touchstart',function(){
 });
     for(var i= 0,len=bank_list.length;i<len;i++){
         (function(i){
-            bank_list[i].addEventListener('click',function(){
-//                for(var j= 0;j<len;j++){
-//                    if(j===i){
-                        a=i;
-                        b='<div class="bank-name-list">'+bank_list[i].querySelector('.bank-name-list').innerHTML+'</div>';
-                        c='*'+bank_list[i].querySelector('.bank-text').innerHTML;
-                        addClass(bank_list[i],'bgG7');
+            bank_list[i].addEventListener('touchstart',function(e){
+                startLeft = e.targetTouches[0].pageY;
+            })
+            bank_list[i].addEventListener('touchmove', function (e) {
+                var endLeft = e.targetTouches[0].pageY;
+                curT = endLeft - startLeft;
+            });
+            bank_list[i].addEventListener('touchend', function (e) {
+                if(curT==0){
+                    a=i;
+                    b='<div class="bank-name-list">'+bank_list[i].querySelector('.bank-name-list').innerHTML+'</div>';
+                    c='*'+bank_list[i].querySelector('.bank-text').innerHTML;
+                    addClass(bank_list[i],'bgG7');
 
-                        removeClass(shot_box,'disNo');
-//                    }else {
-//                        removeClass(bank_list[j],'bgG7')
-//                    }
-//                }
-
+                    removeClass(shot_box,'disNo');
+                }
+                curT=0
             })
         })(i)
     }
