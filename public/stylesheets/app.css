@@ -41,9 +41,15 @@ table {
 }
 html, body {
     height: 100%;
+    font-family: "microsoft yahei", sans-serif, tahoma, arial, "Hiragino Sans GB";
 }
 input{
-    height:100%
+    height:100%;
+    width: 100%;
+    padding:.1rem;
+}
+input[placeholder], [placeholder], *[placeholder] {
+    color:red !important;
 }
 /*字体*/
 .font14{
@@ -59,6 +65,9 @@ input{
 }
 .font22{
     font-size: .22rem;
+}
+.font38{
+    font-size: .38rem;
 }
 .font42{
     font-size: .42rem;
@@ -157,7 +166,6 @@ background: #8FCBC0;
 .listBtn1{
     width:3rem;
     height:0.4rem;
-    margin:0.1rem;
     line-height: .4rem;
     border-radius: .05rem;
     background: linear-gradient(#FAC807,#F9AD32);
@@ -241,6 +249,9 @@ background: #8FCBC0;
 .padTop07{
     padding-top: .07rem;
 }
+.marTop10{
+    margin-top: .1rem;
+}
 .marTop15{
     margin-top: .15rem;
 }
@@ -259,20 +270,49 @@ background: #8FCBC0;
 .line35{
     line-height: .3rem;
 }
+.paddingNoData{
+    padding-top: 45%;
+}
 .marTop30{
     margin-top: .3rem;
+}
+.marTop20{
+    margin-top: .2rem;
+}
+.padLr95{
+    padding-left: .095rem;
+    padding-right:.095rem;
 }
 .padLr10{
       padding-left: .1rem;
       padding-right:.1rem;
   }
+.padB20{
+    padding-bottom: .2rem!important;
+}
 .padLr15{
     padding-left: .15rem;
     padding-right:.15rem;
 }
+.padLr20{
+    padding-left: .2rem;
+    padding-right:.2rem;
+}
+.padLr31{
+    padding-left: .31rem;
+    padding-right:.31rem;
+}
 .padTb5{
     padding-top: .1rem;
     padding-bottom: .05rem;
+}
+.padTb15{
+    padding-top: .15rem;
+    padding-bottom: .15rem;
+}
+.padTb40{
+    padding-top: .4rem;
+    padding-bottom: .4rem;
 }
 .pad20{
     padding: .2rem;
@@ -328,6 +368,9 @@ background: #8FCBC0;
 .height5{
     height:.5rem;
 }
+.height55{
+    height: .55rem;;
+}
 .width100{
     width:100%;
 }
@@ -337,17 +380,29 @@ background: #8FCBC0;
 .width260{
     width:2.6rem;
 }
+.width24{
+    width: 24%;
+}
 .width30{
     width:30%;
 }
 .width34{
-    width: 34.33%;
+    width: 34%;
+}
+.width42{
+    width: 40%;
 }
 .width300{
     width:3rem;
 }
 .width2000{
     width:2rem;
+}
+.width700{
+    width:.7rem;
+}
+.width1200{
+    width:1.2rem;
 }
 .width1300{
     width:1.3rem;
@@ -377,6 +432,14 @@ line-height: .3rem;
     line-height:.5rem;
 }
 .line5-6{
+    line-height: .7rem;
+    height: .5rem;
+}
+.line5-6-3{
+    line-height: .63rem;
+    height: .5rem
+}
+.line5-6-6{
     line-height: .6rem;
     height: .5rem;
 }
@@ -388,6 +451,9 @@ line-height: .5rem;
     margin-top: 1px;
     line-height: .3rem;
     height: .5rem;
+}
+.width80{
+	width: 2.95rem;
 }
 .relative{
     position: relative;
@@ -404,7 +470,7 @@ line-height: .5rem;
 /*列表*/
 .article-triangle{
     position: absolute;
-    right:-.1rem;
+    right:-.2rem;
     top:-.1rem;
     float: right;
     font-size: .25rem;
@@ -418,7 +484,7 @@ line-height: .5rem;
 }
 .article-triangle2{
     position: absolute;
-    right: -.1rem;
+    right: -.2rem;
     top: -.1rem;
     float: right;
     font-size: .14rem;
@@ -632,15 +698,77 @@ line-height: .5rem;
     text-align:center;
     border: 1px solid transparent;
 }
-.house-fixed img{
+.house-fixed img {
     display: block;
     position: relative;
     margin: 0 auto;
-    top:50%;
+    top: 50%;
     max-height: 100%;
     max-width: 100%;
-    vertical-align:middle;
+    vertical-align: middle;
 }
+/*验证吗框*/
+.code-warp {
+  display: block;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 30;
+}
+.code-content {
+  width: 80%;
+  padding: .22rem .176rem .22rem .176rem;
+  background-color: #ffe6e1;
+  position: fixed;
+  left: 10%;
+  top: 30%;
+  z-index: 40;
+  -webkit-border-radius: 0.055rem;
+  -moz-border-radius: 0.055rem;
+  border-radius: 0.055rem;
+}
+.code-content .code-img {
+  width: 100%;
+  height: .55rem;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+.code-content .code-img img {
+  height: 100%;
+  width: auto;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  top: .088rem;
+  left: .088rem;
+}
+.code-content .input_item {
+  height: .4rem;
+  border: 1px solid #ef7f9f;
+}
+.input_item {
+  border: 1px solid #7cd0c8;
+  -webkit-border-radius: 0.055rem;
+  -moz-border-radius: 0.055rem;
+  border-radius: 0.055rem;
+  overflow: hidden;
+  position: relative;
+}
+.code-content .input_item input {
+  padding: 0 .1rem;
+  font-size: .16rem;
+}
+.code-content input {
+  background-color: transparent;
+}
+.btn-widget-bottom {
+  margin-bottom: 0.15rem;
+}
+
 /*银行列表*/
 .bankList{
     margin: 0!important;
@@ -660,7 +788,7 @@ line-height: .5rem;
     display: inline-block;
     width: .3rem;
     height: .3rem;
-   margin-right: .1rem;
+    margin-right: .1rem;
     vertical-align: middle;;
 }
 .bank-name-list span img,
@@ -676,4 +804,26 @@ line-height: .5rem;
     width:1.35rem;
     height:.4rem;
     text-align: center!important;
+}
+.vip{
+    position: relative;
+    top: -.02rem;
+    display: inline-block;
+    width: .35rem;
+    height: .19rem;
+    line-height: .19rem!important;
+    border-radius: .05rem;
+    background: #fff;
+    color: #F9AD32;
+    margin-left: .05rem;
+    padding: 0 .05rem;
+    font-size: .14rem;
+}
+.table th,
+.table td{
+    width: 30%;
+    background: #fff;
+    border:.05rem solid #f9f9f9;
+    padding-top: .03rem;
+    padding-bottom: .03rem;
 }
