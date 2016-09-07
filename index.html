@@ -91,9 +91,12 @@
     }
     var a=queryAll('option');
     for(var i=0;i< a.length;i++){
-        a[i].onclick=function(){
-              query('#url_list').style.display='none';
-            query('#time-list').innerHTML='<div style="width: 2.1rem;height: .4rem; display: inline-block" class="colorG1">'+this.value+'</div><img src="public/images/u30.png" alt="" style="height: .16rem;">';
-        }
+        (function(i){
+            a[i].onclick=function(){
+                query('#url_list').style.display='none';
+                query('#time-list').innerHTML='<div style="width: 2.1rem;height: .4rem; display: inline-block" class="colorG1">'+this.value+'</div><img src="public/images/u30.png" alt="" style="height: .16rem;">';
+                // query('#url_list').style.display='none';
+            }
+        })(i)
     }
 </script>
