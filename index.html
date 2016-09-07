@@ -86,7 +86,13 @@
     query('#time-list').onclick=function(){
         query('#url_list').style.display='block';
         //query('#url_list').style.display='block';
-        alert("aaaa")
+        
 
+    }
+    var a=queryAll('option');
+    for(var i=0;i< a.length;i++){
+        a[i].onclick=function(){
+            query('#time-list').innerHTML='<div style="width: 2.1rem;height: .4rem; display: inline-block" class="colorG1">'+this.value+'</div><img src="public/images/u30.png" alt="" style="height: .16rem;">';
+        }
     }
 </script>
