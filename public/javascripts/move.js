@@ -1,9 +1,6 @@
 /**
  * Created by lianheguo on 2016/9/2.
  */
-var oDiv=document.createElement('div');
-oDiv.classList="house-fixed";
-document.body.insertBefore(oDiv,null);
 var pic_top_ul = query('.house-pic .top-pic ul'),
     pic_img = queryAll('.house-pic .top-pic img'),
     pic_top_li = queryAll('.house-pic .top-pic li'),
@@ -22,18 +19,15 @@ var pic_top_ul = query('.house-pic .top-pic ul'),
     targetObj = {},
     changeObj = {},
     beginObj = {},
-    img_length_ary = [0],
     ary_item = 0,
     dix;
 pic_top_ul.style.width = pic_img.length * outerWidth + 'px';
-item_lists.innerHTML='1/'+pic_img.length;
 for (var i = 0; i < pic_bot_li.length; i++) {
     pic_bot_li[i].style.width = 100 / pic_bot_li.length + '%';
     (function (i) {
-        img_length_ary.push(pic_top_li[i].querySelectorAll('img').length);
         pic_bot_li[i].setAttribute('pic_img_length', pic_top_li[i].querySelectorAll('img').length);
         pic_bot_li[i].addEventListener('click', function () {
-                                           var st = 0
+                                           var st = 0;
                                            prevAll(pic_top_li[i]).forEach(function (o) {
                                                st += o.querySelectorAll('img').length;
                                            });
@@ -95,25 +89,25 @@ for(var j= 0,len=pic_img.length;j<len;j++){
             var litLeft=getCss(pic_top_ul,"left");
             var imgs=queryAll('.house-pic .top-pic div'),str='',dix;
             if(bool){
-                str+='<div style="width:'+ getCss(pic_top_ul,"width")+'px;'+'left:'+  litLeft+'px" class="row absolute" id="fixUl">';
-                for(var k=0;k<imgs.length;k++){
-                    str+='<div><img src="'+ pic_img[k].src+'" alt="" ></div>';
-                }
-                str+='</div>';
-                house_fixed.innerHTML=str;
-                bool=false;
-                house_fixed.style.display='block';
+            str+='<div style="width:'+ getCss(pic_top_ul,"width")+'px;'+'left:'+  litLeft+'px" class="row absolute" id="fixUl">';
+            for(var k=0;k<imgs.length;k++){
+                str+='<div><img src="'+ pic_img[k].src+'" alt="" ></div>';
+            }
+            str+='</div>';
+            house_fixed.innerHTML=str;
+            bool=false;
+            house_fixed.style.display='block';
                 var oimgs=house_fixed.querySelectorAll('img');
                 for(var x=0;x<len;x++){
                     var xh=getCss(oimgs[x],'height')/2+'px';
                     console.log('-'+xh)
-                    setCss(oimgs[x],'margin-top','-'+xh)
+                   setCss(oimgs[x],'margin-top','-'+xh)
                 }
             }else {
-                setCss(query('#fixUl'),'left',litLeft);
-                house_fixed.style.display='block';
+             setCss(query('#fixUl'),'left',litLeft);
+             house_fixed.style.display='block';
             }
-            dix= query('#fixUl'),dix_img=queryAll('.house-fixed img'),step2=step;
+           dix= query('#fixUl'),dix_img=queryAll('.house-fixed img'),step2=step;
             dix.addEventListener('touchstart', function (e) {
                 startLeft = e.targetTouches[0].pageX;
                 left = getCss(dix, 'left');

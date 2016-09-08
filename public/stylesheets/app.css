@@ -44,12 +44,33 @@ html, body {
     font-family: "microsoft yahei", sans-serif, tahoma, arial, "Hiragino Sans GB";
 }
 input{
-    height:100%;
     width: 100%;
+    height:100%;
     padding:.1rem;
+    font-size: .16rem;
 }
 input[placeholder], [placeholder], *[placeholder] {
-    color:red !important;
+    color:#AFAFAF !important;
+}
+select {
+    display:inline-block;
+    border: none;
+    width:2rem;
+    height:.4rem;
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+}
+select::-ms-expand { display: none; }
+.table0{
+    width: 100%;
+}
+.table0 tr td:nth-child(1){
+    width: 30%;
+}
+.table0 td{
+    padding-left: .03rem;
+    border:1px solid #ccc;
 }
 /*字体*/
 .font14{
@@ -249,11 +270,11 @@ background: #8FCBC0;
 .padTop07{
     padding-top: .07rem;
 }
-.marTop10{
-    margin-top: .1rem;
-}
 .marTop15{
     margin-top: .15rem;
+}
+.marTop20{
+    margin-top: .2rem;
 }
 .marBot15{
     margin-bottom: .15rem;
@@ -270,14 +291,8 @@ background: #8FCBC0;
 .line35{
     line-height: .3rem;
 }
-.paddingNoData{
-    padding-top: 45%;
-}
 .marTop30{
     margin-top: .3rem;
-}
-.marTop20{
-    margin-top: .2rem;
 }
 .padLr95{
     padding-left: .095rem;
@@ -381,7 +396,7 @@ background: #8FCBC0;
     width:2.6rem;
 }
 .width24{
-    width: 24%;
+    width: 26%;
 }
 .width30{
     width:30%;
@@ -451,9 +466,6 @@ line-height: .5rem;
     margin-top: 1px;
     line-height: .3rem;
     height: .5rem;
-}
-.width80{
-	width: 2.95rem;
 }
 .relative{
     position: relative;
@@ -698,77 +710,15 @@ line-height: .5rem;
     text-align:center;
     border: 1px solid transparent;
 }
-.house-fixed img {
+.house-fixed img{
     display: block;
     position: relative;
     margin: 0 auto;
-    top: 50%;
+    top:50%;
     max-height: 100%;
     max-width: 100%;
-    vertical-align: middle;
+    vertical-align:middle;
 }
-/*验证吗框*/
-.code-warp {
-  display: block;
-  content: "";
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 30;
-}
-.code-content {
-  width: 80%;
-  padding: .22rem .176rem .22rem .176rem;
-  background-color: #ffe6e1;
-  position: fixed;
-  left: 10%;
-  top: 30%;
-  z-index: 40;
-  -webkit-border-radius: 0.055rem;
-  -moz-border-radius: 0.055rem;
-  border-radius: 0.055rem;
-}
-.code-content .code-img {
-  width: 100%;
-  height: .55rem;
-  background-color: #ffffff;
-  overflow: hidden;
-}
-.code-content .code-img img {
-  height: 100%;
-  width: auto;
-  display: block;
-  margin: 0 auto;
-  position: relative;
-  top: .088rem;
-  left: .088rem;
-}
-.code-content .input_item {
-  height: .4rem;
-  border: 1px solid #ef7f9f;
-}
-.input_item {
-  border: 1px solid #7cd0c8;
-  -webkit-border-radius: 0.055rem;
-  -moz-border-radius: 0.055rem;
-  border-radius: 0.055rem;
-  overflow: hidden;
-  position: relative;
-}
-.code-content .input_item input {
-  padding: 0 .1rem;
-  font-size: .16rem;
-}
-.code-content input {
-  background-color: transparent;
-}
-.btn-widget-bottom {
-  margin-bottom: 0.15rem;
-}
-
 /*银行列表*/
 .bankList{
     margin: 0!important;
@@ -788,7 +738,7 @@ line-height: .5rem;
     display: inline-block;
     width: .3rem;
     height: .3rem;
-    margin-right: .1rem;
+   margin-right: .1rem;
     vertical-align: middle;;
 }
 .bank-name-list span img,
@@ -819,6 +769,7 @@ line-height: .5rem;
     padding: 0 .05rem;
     font-size: .14rem;
 }
+
 .table th,
 .table td{
     width: 30%;
