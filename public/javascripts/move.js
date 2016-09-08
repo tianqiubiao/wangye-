@@ -44,6 +44,8 @@ for (var i = 0; i < pic_bot_li.length; i++) {
 pic_top_ul.addEventListener('touchstart', function (e) {
     startLeft = e.targetTouches[0].pageX;
     left = getCss(pic_top_ul, 'left');
+    
+    alert(e.touches.length)
 });
 pic_top_ul.addEventListener('touchmove', function (e) {
     var endLeft = e.targetTouches[0].pageX;
