@@ -44,8 +44,6 @@ for (var i = 0; i < pic_bot_li.length; i++) {
 pic_top_ul.addEventListener('touchstart', function (e) {
     startLeft = e.targetTouches[0].pageX;
     left = getCss(pic_top_ul, 'left');
-    
-    alert(e.touches.length)
 });
 pic_top_ul.addEventListener('touchmove', function (e) {
     var endLeft = e.targetTouches[0].pageX;
@@ -88,6 +86,7 @@ var bool=true;
 for(var j= 0,len=pic_img.length;j<len;j++){
     (function(j){
         pic_img[j].onclick=function(){
+            document.body.style.overflow='hidden';
             var litLeft=getCss(pic_top_ul,"left");
             var imgs=queryAll('.house-pic .top-pic div'),str='',dix;
             if(bool){
@@ -111,75 +110,85 @@ for(var j= 0,len=pic_img.length;j<len;j++){
             }
            dix= query('#fixUl'),dix_img=queryAll('.house-fixed img'),step2=step;
             dix.addEventListener('touchstart', function (e) {
-                startLeft = e.targetTouches[0].pageX;
-                left = getCss(dix, 'left');
-            });
-            dix.addEventListener('touchmove', function (e) {
-                var endLeft = e.targetTouches[0].pageX;
-                curT = endLeft - startLeft;
-                dix.style.left = left + curT + 'px'
-            });
-            dix.addEventListener('touchend', function (e) {
-                if (curT > 50) {
-                    if (step2 === 0) {
-                        targetObj = {left: 0};
-                        move2();
-                    } else {
-                        step2--;
-                        targetObj = {left: left + (outerWidth)};
-                        move2();
-                        curT = 0;
-                    }
-                } else if (curT < -50) {
-                    if (step2 === count - 1) {
-                        targetObj = {left: -(dix_img.length - 1) * outerWidth};
-                        move2();
-                        return;
-                    } else {
-                        step2++;
-                        targetObj = {left: left - (outerWidth)};
-                        move2();
-                        curT = 0;
-                    }
-                } else {
-                    targetObj = {left: -(step2) * outerWidth};
-                    move2();
-                    return;
-                }
-            });
-            function move2() {
-                for (var key in targetObj) {
-                    if (targetObj.hasOwnProperty(key)) {
-                        beginObj[key] = getCss( dix, key);
-                        changeObj[key] = targetObj[key] - beginObj[key];
-                    }
-                }
-                window.clearTimeout(timer2);
-                window.clearTimeout(timer);
-                time += 10;
-                if (time >= duration) {
-                    for (var key in targetObj) {
-                        if (targetObj.hasOwnProperty(key)) {
-                            setCss( dix, key, targetObj[key]);
+                if(e.touches.length===2){
+var strLeft1=e.touches[0].pageX;
+var strLeft2=e.touches[1].pageX;
+var strTop1=e.touches[0].pageY;
+var strTop2=e.touches[0].pageY;
+                    alert(strLeft1+';'+strLeft2+';'+strTop1+';'+strTop2)
+                }else {
+                    startLeft = e.targetTouches[0].pageX;
+                    left = getCss(dix, 'left');
+                    dix.addEventListener('touchmove', function (e) {
+                        var endLeft = e.targetTouches[0].pageX;
+                        curT = endLeft - startLeft;
+                        dix.style.left = left + curT + 'px'
+                    });
+                    dix.addEventListener('touchend', function (e) {
+                        if (curT > 50) {
+                            if (step2 === 0) {
+                                targetObj = {left: 0};
+                                move2();
+                            } else {
+                                step2--;
+                                targetObj = {left: left + (outerWidth)};
+                                move2();
+                                curT = 0;
+                            }
+                        } else if (curT < -50) {
+                            if (step2 === count - 1) {
+                                targetObj = {left: -(dix_img.length - 1) * outerWidth};
+                                move2();
+                                return;
+                            } else {
+                                step2++;
+                                targetObj = {left: left - (outerWidth)};
+                                move2();
+                                curT = 0;
+                            }
+                        } else {
+                            targetObj = {left: -(step2) * outerWidth};
+                            move2();
+                            return;
                         }
+                    });
+                    function move2() {
+                        for (var key in targetObj) {
+                            if (targetObj.hasOwnProperty(key)) {
+                                beginObj[key] = getCss( dix, key);
+                                changeObj[key] = targetObj[key] - beginObj[key];
+                            }
+                        }
+                        window.clearTimeout(timer2);
+                        window.clearTimeout(timer);
+                        time += 10;
+                        if (time >= duration) {
+                            for (var key in targetObj) {
+                                if (targetObj.hasOwnProperty(key)) {
+                                    setCss( dix, key, targetObj[key]);
+                                }
+                            }
+                            time = 0;
+                            return;
+                        }
+                        for (key in targetObj) {
+                            if (targetObj.hasOwnProperty(key)) {
+                                var curPos = linear(time, beginObj[key], changeObj[key], duration);
+                                setCss( dix, key, curPos);
+                            }
+                        }
+                        timer2 = window.setTimeout(move2, 10);
                     }
-                    time = 0;
-                    return;
                 }
-                for (key in targetObj) {
-                    if (targetObj.hasOwnProperty(key)) {
-                        var curPos = linear(time, beginObj[key], changeObj[key], duration);
-                        setCss( dix, key, curPos);
-                    }
-                }
-                timer2 = window.setTimeout(move2, 10);
-            }
+            });
+
         }
     })(j)
 }
 
 house_fixed.onclick=function(){
-    house_fixed.style.display='none'
+    house_fixed.style.display='none';
+    document.body.style.overflow='auto';
 };
 function changeList() {
     item_lists.innerHTML = step + 1 + '/' + pic_img.length
