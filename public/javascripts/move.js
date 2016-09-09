@@ -131,6 +131,7 @@ for(var j= 0,len=pic_img.length;j<len;j++){
                         dix.style.left = left + curT + 'px'
                     });
                     dix.addEventListener('touchend', function (e) {
+                        alert(e.target.style.width+';'+e.target.style.height+';'+e.target.style.left+';'+e.target.style.top)
                         //if (curT > 50) {
                         //    if (step2 === 0) {
                         //        targetObj = {left: 0};
@@ -158,7 +159,7 @@ for(var j= 0,len=pic_img.length;j<len;j++){
                         //    return;
                         //}
                     });
-                    alert(strLeft1+';'+strLeft2+';'+strTop1+';'+strTop2)
+
                 }else {
                     startLeft = e.targetTouches[0].pageX;
                     left = getCss(dix, 'left');
