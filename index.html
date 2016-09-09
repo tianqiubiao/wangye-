@@ -6,172 +6,182 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="public/stylesheets/app.css">
-    <style>
-        .box {
-
-            display: table-cell;
-            vertical-align:middle;
-            text-align:center;
-
-            *display: block;
-
-            *font-size: 87.3%;/*约为高度的0.873，200*0.873 约为175*/
-
-            *font-family:Arial;/*防止非utf-8引起的hack失效问题，如gbk编码*/
-
-            width:1600%;
-
-            height:100%;
-            border: 1px solid transparent;
-
-        }
-
-        .box img {
-
-            /*设置图片垂直居中*/
-
-            vertical-align:middle;
-
-        }
-      .placeholder{
-            /*background: url("preloader.gif") no-repeat center center;*/
-            height: 100%;
-            line-height: 1px;
-            text-align: center;
-            width:100%;
-            display:inline-block;
-        }
-
-        /* The before element moves the
-         * image halfway from the top */
-
-        .placeholder:before{
-            content: "";
-            display: inline-block;
-            height: 50%;
-            width: 1px;
-            margin-right:-1px;
-        }
-
-         .placeholder img{
-            display: inline-block;
-            max-height: 100%;
-            max-width: 100%;
-            vertical-align: middle;
-        }
-    </style>
 </head>
 <body>
+<div class="min-height100 bgG8 padTop25">
+    <div class="padLr10">
+        <div class="row relative">
+            <div class="left width100">
+                <div class="font14 colorG4 text-left">2016-BJ-0001 <span class="colorB1 right">查看合同</span></div>
+                <div class="font18 colorG1 text-left line_height30">旭辉街区26号</div>
+            </div>
+        </div>
+        <!--分割线-->
+        <div class="split-line"></div>
+        <div class="font14 line30">
+            <span class="colorG5">预约剩余时间：</span>
+            <span class="colorC1">28时20分19秒</span>
+        </div>
+        <div class="row height800">
+            <div class="text-left left width30">
+                <div class="row">
+                    <span class="colorR1 font42 left">50</span>
+                    <span class="font22 colorR1 left line5-6">%</span>
+                </div>
+                <div class="font14 colorG5">预计年化收益</div>
+            </div>
+            <div class="text-center left width30">
+                <div class="row">
+                    <span class="colorG2 font42 left">12</span>
+                    <span class="font22 colorG2 left line5-6">个月</span>
+                </div>
+                <div class="font14 colorG5">预计周期</div>
+            </div>
+            <div class="text-right left width30">
+                <div class="row">
+                    <span class="font16 colorG2 right line5-6">1000万</span>
+                </div>
+                <div class="font14 colorG5">项目估值</div>
+            </div>
+        </div>
+    </div>
+    <!--图片-->
+    <div class="house-pic marTop15" id="house_pic">
+        <div class="top-pic">
+            <ul class="row">
+                <li>
+                    <div><img src="public/images/b0.jpg" alt=""></div>
+                    <div><img src="public/images/pic-iumg.png" alt=""></div>
+                </li>
+                <li>
+                    <div><img src="public/images/b1.jpg" alt=""></div>
+                    <div><img src="public/images/pic-iumg.png" alt=""></div>
+                </li>
+                <li>
+                    <div><img src="public/images/b2.jpg" alt=""></div>
+                    <div><img src="public/images/pic-iumg.png" alt=""></div>
+                    <div><img src="public/images/b3.jpg" alt=""></div>
+                    <div><img src="public/images/pic-iumg.png" alt=""></div>
+                    <div><img src="public/images/b4.jpg" alt=""></div>
+                    <div><img src="public/images/pic-iumg.png" alt=""></div>
+                </li>
+                <li>
+                    <div><img src="public/images/b5.jpg" alt=""></div>
+                    <div><img src="public/images/pic-iumg.png" alt=""></div>
+                </li>
+                <li>
+                    <div><img src="public/images/b3.jpg" alt=""></div>
+                    <div><img src="public/images/pic-iumg.png" alt=""></div>
+                </li>
+            </ul>
+        </div>
+        <div class="item-lists">1/10</div>
+        <div class="bot-pic">
+            <ul class="row">
+                <li class="colorWhite">外立面</li>
+                <li>内部图</li>
+                <li>交通图</li>
+                <li>平面</li>
+                <li>配套图</li>
+            </ul>
+        </div>
+    </div>
 
+    <div class="bgWhite colorC1 font16 text-center line30">项目详情</div>
+    <div class="padTb15 padLr10 font14 line_height25">
+        <div class="colorG1">
+            <span class="colorG4">交易方式：</span>股权
+        </div>
+        <div class="colorG1">
+            <span class="colorG4">项目地点：</span>**
+        </div>
+        <div class="colorG1">
+            <span class="colorG4">土地性质：</span>
+            住宅
+        </div>
+        <div class="colorG1">
+            <span class="colorG4">产权年限：</span>
+            70年
+        </div>
+        <div class="colorG1">
+            <span class="colorG4">项目性质：</span>
+            新楼盘
+        </div>
+        <div class="colorG1">
+            <span class="colorG4">交易标的总建筑面积：</span>
+            ***平方米
+        </div>
+        <div class="colorG1">
+            <span class="colorG4">交易金额：</span>
+            **万元
+        </div>
+        <div class="colorG1">
+            <span class="colorG4">楼高：</span>
+            **层
+        </div>
+    </div>
+    <div class="bgWhite colorC1 font16 text-center line30">基本信息</div>
+    <div class="table padLr95 font14 marTop15">
+        <table class="text-center width100" cellspacing="10" >
+            <thead>
+            <tr class="colorG4">
+                <th>业态</th>
+                <th>层数</th>
+                <th>物业</th>
+            </tr>
+            </thead>
+            <tbody class="colorG1">
+            <tr>
+                <td>商业</td>
+                <td>1-3</td>
+                <td>6元/月/㎡</td>
+            </tr>
+            <tr>
+                <td>公寓</td>
+                <td>4-20</td>
+                <td>5元/月/㎡</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="padTb15 padLr10 font14 line_height25">
+        <div class="colorG1">
+            <span class="colorG4">水电：</span>商水商电
+        </div>
+        <div class="colorG1">
+            <span class="colorG4">燃气：</span>无
+        </div>
+        <div class="colorG1">
+            <span class="colorG4">主力户型：</span>
 
+        </div>
+        <div class="colorG1">
+            <span class="colorG4">停车位：</span>
 
+        </div>
+        <div class="colorG1">
+            <span class="colorG4">租赁情况：</span>主要租户、租金、租赁年限（仅限二手）
 
+        </div>
+        <div class="colorG1">
+            <span class="colorG4">债务债权：</span>
 
-<div class="placeholder" style="position: fixed;top: 0;background: orange">
-    <img src="public/images/b0.jpg" alt="">
+        </div>
+        <div class="colorG1">
+            <span class="colorG4">周边情况：</span>交通、教育、医疗、银行、超市、娱乐、公园等（文字描述+图片）
+        </div>
+        <img src="public/images/pic-iumg.png" alt="" class="marAuto padTb15">
+        <div class="colorG1">
+            <span class="colorG4">周边竞品：</span>楼盘名称、主力户型、层高、产品类型（平层、LOFT、联合办公等）、价格、价格环比（增长/下降/持平）、去化速度（文字描述+图片）
+            <img src="public/images/pic-iumg.png" alt="" class="marAuto padTb15">
+            楼盘名称、主力户型、层高、产品类型（平层、LOFT、联合办公等）、
+            <img src="public/images/pic-iumg.png" alt="" class="marAuto padTb15">
+        </div>
+    </div>
 </div>
+<div class="house-fixed">
 
-<!--<div class="min-height100 bgG8 padTop25">-->
-    <!--<div class="padLr10">-->
-        <!--<div class="row relative">-->
-            <!--<div class="left width100">-->
-                <!--<div class="font14 colorG4 text-left">2016-BJ-0001 <span class="colorB1 right">查看合同</span></div>-->
-                <!--<div class="font18 colorG1 text-left line_height30">旭辉街区26号</div>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--&lt;!&ndash;分割线&ndash;&gt;-->
-        <!--<div class="split-line"></div>-->
-        <!--<div class="font14 line30">-->
-            <!--<span class="colorG5">预约剩余时间：</span>-->
-            <!--<span class="colorC1">28时20分19秒</span>-->
-        <!--</div>-->
-        <!--<div class="row height800">-->
-            <!--<div class="text-left left width30">-->
-                <!--<div class="row">-->
-                    <!--<span class="colorR1 font42 left">50</span>-->
-                    <!--<span class="font22 colorR1 left line5-6">%</span>-->
-                <!--</div>-->
-                <!--<div class="font14 colorG5">预计年化收益</div>-->
-            <!--</div>-->
-            <!--<div class="text-center left width30">-->
-                <!--<div class="row">-->
-                    <!--<span class="colorG2 font42 left">12</span>-->
-                    <!--<span class="font22 colorG2 left line5-6">个月</span>-->
-                <!--</div>-->
-                <!--<div class="font14 colorG5">预计周期</div>-->
-            <!--</div>-->
-            <!--<div class="text-right left width30">-->
-                <!--<div class="row">-->
-                    <!--<span class="font16 colorG2 right line5-6">1000万</span>-->
-                <!--</div>-->
-                <!--<div class="font14 colorG5">项目估值</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--&lt;!&ndash;图片&ndash;&gt;-->
-    <!--<div class="house-pic marTop15" id="house_pic">-->
-        <!--<div class="top-pic">-->
-            <!--<ul class="row">-->
-                <!--<li>-->
-                    <!--<div><img src="public/images/b0.jpg" alt=""></div>-->
-                    <!--<div><img src="public/images/pic-iumg.png" alt=""></div>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<div><img src="public/images/b1.jpg" alt=""></div>-->
-                    <!--<div><img src="public/images/pic-iumg.png" alt=""></div>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<div><img src="public/images/b2.jpg" alt=""></div>-->
-                    <!--<div><img src="public/images/pic-iumg.png" alt=""></div>-->
-                    <!--<div><img src="public/images/b3.jpg" alt=""></div>-->
-                    <!--<div><img src="public/images/pic-iumg.png" alt=""></div>-->
-                    <!--<div><img src="public/images/b4.jpg" alt=""></div>-->
-                    <!--<div><img src="public/images/pic-iumg.png" alt=""></div>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<div><img src="public/images/b5.jpg" alt=""></div>-->
-                    <!--<div><img src="public/images/pic-iumg.png" alt=""></div>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<div><img src="public/images/b3.jpg" alt=""></div>-->
-                    <!--<div><img src="public/images/pic-iumg.png" alt=""></div>-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</div>-->
-        <!--<div class="item-lists">1/10</div>-->
-        <!--<div class="bot-pic">-->
-            <!--<ul class="row">-->
-                <!--<li class="colorWhite">外立面</li>-->
-                <!--<li>内部图</li>-->
-                <!--<li>交通图</li>-->
-                <!--<li>平面</li>-->
-                <!--<li>配套图</li>-->
-            <!--</ul>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--&lt;!&ndash;<div style="width: 100%;height: 100%;background: orange;text-align: center;top: 0;" class="fixed">&ndash;&gt;-->
-        <!--&lt;!&ndash;<img src="public/images/b2.jpg" alt="" style="text-align: center;vertical-align:-webkit-baseline-middle;">&ndash;&gt;-->
-    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-
-<!--</div>-->
-<!--<div class="house-fixed">-->
-    <!--<div id="fixUl">-->
-        <!--<div><img src="public/images/b0.jpg" alt=""></div>-->
-        <!--<div><img src="public/images/pic-iumg.png" alt=""></div>-->
-        <!--<div><img src="public/images/b1.jpg" alt=""></div>-->
-        <!--<div><img src="public/images/pic-iumg.png" alt=""></div>-->
-        <!--<div><img src="public/images/b2.jpg" alt=""></div>-->
-        <!--<div><img src="public/images/pic-iumg.png" alt=""></div>-->
-        <!--<div><img src="public/images/b3.jpg" alt=""></div>-->
-        <!--<div><img src="public/images/pic-iumg.png" alt=""></div>-->
-        <!--<div><img src="public/images/b4.jpg" alt=""></div>-->
-        <!--<div><img src="public/images/pic-iumg.png" alt=""></div>-->
-        <!--<div><img src="public/images/b5.jpg" alt=""></div>-->
-        <!--<div><img src="public/images/pic-iumg.png" alt=""></div>-->
-        <!--<div><img src="public/images/b3.jpg" alt=""></div>-->
-        <!--<div><img src="public/images/pic-iumg.png" alt=""></div>-->
-    <!--</div>-->
-<!--</div>-->
+</div>
 </body>
 </html>
 <script src="public/javascripts/app.js"></script>
