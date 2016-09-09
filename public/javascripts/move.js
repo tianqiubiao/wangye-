@@ -127,12 +127,12 @@ for(var j= 0,len=pic_img.length;j<len;j++){
 
                             e.target.style.width=function(){
                                 var Lw=endLeft1-strLeft1>0?endLeft1-strLeft1:endLeft2-strLeft2;
-                                    return  parseFloat(w)+Lw)+'px';
+                                    return  parseFloat(w)+Lw+'px';
                             }
 
                             e.target.style.height=function(){
                                     var Lh=endTop1-strTop1>0?endTop1-strTop1:endTop2-strTop2;
-                                    return  parseFloat(h)+Lh)+'px';
+                                    return  parseFloat(h)+Lh+'px';
                         }
                                 //parseFloat(h)+(endTop1-strTop1)+(endTop2-strTop2)+'px';
                             e.target.style.left=parseFloat(w)/2+'px';
