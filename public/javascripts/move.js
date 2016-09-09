@@ -115,6 +115,8 @@ for(var j= 0,len=pic_img.length;j<len;j++){
                     var strLeft2=e.touches[1].pageX;
                     var strTop1=e.touches[0].pageY;
                     var strTop2=e.touches[1].pageY;
+                    var w=   window.getComputedStyle(e.target,null)['width']
+                    var h=   window.getComputedStyle(e.target,null)['height']
                     dix.addEventListener('touchmove', function (e) {
                         //var endLeft = e.targetTouches[0].pageX;
                         var endLeft1=e.touches[0].pageX;
@@ -122,8 +124,6 @@ for(var j= 0,len=pic_img.length;j<len;j++){
                         var endTop1=e.touches[0].pageY;
                         var endTop2=e.touches[1].pageY;
                         if(endLeft1-strLeft1>0||endLeft2-strLeft2>0||endTop1-strTop1>0||endTop2-strTop2>0){
-                          var w=   window.getComputedStyle(e.target,null)['width']
-                          var h=   window.getComputedStyle(e.target,null)['height']
                             e.target.style.width=parseFloat(w)+(endLeft1-strLeft1)+(endLeft2-strLeft2)+'px';
                             e.target.style.height=parseFloat(h)+(endTop1-strTop1)+(endTop2-strTop2)+'px';
                             e.target.style.left=parseFloat(w)/2+'px';
