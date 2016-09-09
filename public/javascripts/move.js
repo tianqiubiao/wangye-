@@ -123,7 +123,8 @@ for(var j= 0,len=pic_img.length;j<len;j++){
             }
             dix= query('#fixUl'),dix_img=queryAll('.house-fixed img'),step2=step;
             dix.addEventListener('touchstart', function (e) {
-                if(e.targetTouches.length===2){
+                alert(e.touches.length)
+                if(e.touches.length===2){
 
                 }else {
                     startLeft = e.targetTouches[0].pageX;
@@ -132,7 +133,7 @@ for(var j= 0,len=pic_img.length;j<len;j++){
             });
             dix.addEventListener('touchmove', function (e) {
                 e.preventDefault();
-                if(e.targetTouches.length===2){
+                if(e.touches.length===2){
                 }else {
                     var endLeft = e.targetTouches[0].pageX;
                     curT = endLeft - startLeft;
@@ -140,9 +141,9 @@ for(var j= 0,len=pic_img.length;j<len;j++){
                 }
             });
             dix.addEventListener('touchend', function (e) {
-                alert(e.targetTouches.length)
+                //console.log(e.targetTouches)
                 this.width++
-                if(e.targetTouches.length===2){
+                if(e.touches.length===2){
                     var that
                     if(this.tagName.toLocaleLowerCase()==='img'){
                         that=this;
