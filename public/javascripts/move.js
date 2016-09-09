@@ -107,6 +107,7 @@ for(var j= 0,len=pic_img.length;j<len;j++){
             }else {
              setCss(query('#fixUl'),'left',litLeft);
              house_fixed.style.display='block';
+                document.bo.style.overflow='hidden'
             }
            dix= query('#fixUl'),dix_img=queryAll('.house-fixed img'),step2=step;
             dix.addEventListener('touchstart', function (e) {
@@ -135,8 +136,8 @@ for(var j= 0,len=pic_img.length;j<len;j++){
                                     return  parseFloat(h)+Lh+'px';
                         }
                                 //parseFloat(h)+(endTop1-strTop1)+(endTop2-strTop2)+'px';
-                            e.target.style.left=parseFloat(w)/2+'px';
-                            e.target.style.top=parseFloat(h)/2+'px';
+                            e.target.style.left=parseFloat(w)/2*-1+'px';
+                            e.target.style.top=parseFloat(h)/2*-1+'px';
                         }
                         //curT = endLeft - startLeft;
                         //dix.style.left = left + curT + 'px'
