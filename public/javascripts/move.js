@@ -111,10 +111,53 @@ for(var j= 0,len=pic_img.length;j<len;j++){
            dix= query('#fixUl'),dix_img=queryAll('.house-fixed img'),step2=step;
             dix.addEventListener('touchstart', function (e) {
                 if(e.touches.length===2){
-var strLeft1=e.touches[0].pageX;
-var strLeft2=e.touches[1].pageX;
-var strTop1=e.touches[0].pageY;
-var strTop2=e.touches[0].pageY;
+                    var strLeft1=e.touches[0].pageX;
+                    var strLeft2=e.touches[1].pageX;
+                    var strTop1=e.touches[0].pageY;
+                    var strTop2=e.touches[1].pageY;
+                    dix.addEventListener('touchmove', function (e) {
+                        //var endLeft = e.targetTouches[0].pageX;
+                        var endLeft1=e.touches[0].pageX;
+                        var endLeft2=e.touches[1].pageX;
+                        var endTop1=e.touches[0].pageY;
+                        var endTop2=e.touches[1].pageY;
+                        if(endLeft1-strLeft1>0||endLeft2-strLeft2>0||endTop1-strTop1>0||endTop2-strTop2>0){
+                            e.target.style.width=parseFloat(e.target.style.width)+(endLeft1-strLeft1)+(endLeft2-strLeft2)+'px';
+                            e.target.style.height=parseFloat(e.target.style.height))+(endTop1-strTop1)+(endTop2-strTop2)+'px';
+                            e.target.style.left=parseFloat(e.target.style.width)/2+'px';
+                            e.target.style.top=parseFloat(e.target.style.height)/2+'px';
+                        }
+                        curT = endLeft - startLeft;
+                        dix.style.left = left + curT + 'px'
+                    });
+                    dix.addEventListener('touchend', function (e) {
+                        //if (curT > 50) {
+                        //    if (step2 === 0) {
+                        //        targetObj = {left: 0};
+                        //        move2();
+                        //    } else {
+                        //        step2--;
+                        //        targetObj = {left: left + (outerWidth)};
+                        //        move2();
+                        //        curT = 0;
+                        //    }
+                        //} else if (curT < -50) {
+                        //    if (step2 === count - 1) {
+                        //        targetObj = {left: -(dix_img.length - 1) * outerWidth};
+                        //        move2();
+                        //        return;
+                        //    } else {
+                        //        step2++;
+                        //        targetObj = {left: left - (outerWidth)};
+                        //        move2();
+                        //        curT = 0;
+                        //    }
+                        //} else {
+                        //    targetObj = {left: -(step2) * outerWidth};
+                        //    move2();
+                        //    return;
+                        //}
+                    });
                     alert(strLeft1+';'+strLeft2+';'+strTop1+';'+strTop2)
                 }else {
                     startLeft = e.targetTouches[0].pageX;
