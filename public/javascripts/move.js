@@ -89,27 +89,28 @@ for(var j= 0,len=pic_img.length;j<len;j++){
             document.body.style.overflow='hidden';
             var litLeft=getCss(pic_top_ul,"left");
             var imgs=queryAll('.house-pic .top-pic div'),str='',dix;
-            if(bool){
-            str+='<div style="width:'+ getCss(pic_top_ul,"width")+'px;'+'left:'+  litLeft+'px" class="row absolute" id="fixUl">';
-            for(var k=0;k<imgs.length;k++){
-                str+='<div><img src="'+ pic_img[k].src+'" alt="" ></div>';
-            }
-            str+='</div>';
-            house_fixed.innerHTML=str;
-            bool=false;
+            //if(bool){
+            //str+='<div style="width:'+ getCss(pic_top_ul,"width")+'px;'+'left:'+  litLeft+'px" class="row absolute" id="fixUl">';
+            //for(var k=0;k<imgs.length;k++){
+            //    str+='<div><img src="'+ pic_img[k].src+'" alt="" ></div>';
+            //}
+            //str+='</div>';
+            //house_fixed.innerHTML=str;
+            //bool=false;
             house_fixed.style.display='block';
+            //document.body.style.overflow='hidden';
                 var oimgs=house_fixed.querySelectorAll('img');
                 for(var x=0;x<len;x++){
                     var xh=getCss(oimgs[x],'height')/2+'px';
                     //console.log('-'+xh)
                    setCss(oimgs[x],'margin-top','-'+xh)
                 }
-            }else {
-             setCss(query('#fixUl'),'left',litLeft);
-             house_fixed.style.display='block';
-                document.bo.style.overflow='hidden'
-            }
-           dix= query('#fixUl'),dix_img=queryAll('.house-fixed img'),step2=step;
+            //}else {
+            // setCss(query('#fixUl'),'left',litLeft);
+            // house_fixed.style.display='block';
+            //    document.bo.style.overflow='hidden'
+            //}
+            dix= query('#fixUl'),dix_img=queryAll('.house-fixed img'),step2=step;
             dix.addEventListener('touchstart', function (e) {
                 if(e.touches.length===2){
                     var strLeft1=e.touches[0].pageX;
@@ -182,8 +183,8 @@ for(var j= 0,len=pic_img.length;j<len;j++){
                     });
                     dix.addEventListener('touchend', function (e) {
                         //window.getComputedStyle(e.target,null)['width']
-                        console.log(window.getComputedStyle(e.target,null)['width'])
-                        console.log(e.target.style.width+';'+e.target.style.height+';'+e.target.style.left+';'+e.target.style.top)
+                        //console.log(window.getComputedStyle(e.target,null)['width'])
+                        //console.log(e.target.style.width+';'+e.target.style.height+';'+e.target.style.left+';'+e.target.style.top)
                         if (curT > 50) {
                             if (step2 === 0) {
                                 targetObj = {left: 0};
