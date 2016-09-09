@@ -44,9 +44,10 @@ for (var i = 0; i < pic_bot_li.length; i++) {
 pic_top_ul.addEventListener('touchstart', function (e) {
     startLeft = e.targetTouches[0].pageX;
     left = getCss(pic_top_ul, 'left');
-    console.log(e.touches)
+    //console.log(e.touches)
 });
 pic_top_ul.addEventListener('touchmove', function (e) {
+    e.preventDefault();
     var endLeft = e.targetTouches[0].pageX;
     curT = endLeft - startLeft;
     pic_top_ul.style.left = left + curT + 'px'
@@ -122,43 +123,65 @@ for(var j= 0,len=pic_img.length;j<len;j++){
             }
             dix= query('#fixUl'),dix_img=queryAll('.house-fixed img'),step2=step;
             dix.addEventListener('touchstart', function (e) {
-                startLeft = e.targetTouches[0].pageX;
-                left = getCss(dix, 'left');
+                if(e.targetTouches.length===2){
+
+                }else {
+                    startLeft = e.targetTouches[0].pageX;
+                    left = getCss(dix, 'left');
+                }
             });
             dix.addEventListener('touchmove', function (e) {
                 e.preventDefault();
-                var endLeft = e.targetTouches[0].pageX;
-                curT = endLeft - startLeft;
-                dix.style.left = left + curT + 'px'
+                if(e.targetTouches.length===2){
+                }else {
+                    var endLeft = e.targetTouches[0].pageX;
+                    curT = endLeft - startLeft;
+                    dix.style.left = left + curT + 'px'
+                }
             });
             dix.addEventListener('touchend', function (e) {
-                if (curT > 50) {
-                    if (step2 === 0) {
-                        targetObj = {left: 0};
-                        move2();
-                    } else {
-                        step2--;
-                        targetObj = {left: left + (outerWidth)};
-                        move2();
-                        curT = 0;
+                alert(e.targetTouches.length)
+                this.width++
+                if(e.targetTouches.length===2){
+                    var that
+                    if(this.tagName.toLocaleLowerCase()==='img'){
+                        that=this;
+                    }else if(this.firstElementChild.tagName.toLocaleLowerCase()==='img'){
+                        that=this.firstElementChild
+                    }else {
+                        return
                     }
-                } else if (curT < -50) {
-                    if (step2 === count - 1) {
-                        targetObj = {left: -(dix_img.length - 1) * outerWidth};
+                   that.width++;
+
+                }else {
+                    if (curT > 50) {
+                        if (step2 === 0) {
+                            targetObj = {left: 0};
+                            move2();
+                        } else {
+                            step2--;
+                            targetObj = {left: left + (outerWidth)};
+                            move2();
+                            curT = 0;
+                        }
+                    } else if (curT < -50) {
+                        if (step2 === count - 1) {
+                            targetObj = {left: -(dix_img.length - 1) * outerWidth};
+                            move2();
+                            return;
+                        } else {
+                            step2++;
+                            targetObj = {left: left - (outerWidth)};
+                            move2();
+                            curT = 0;
+                        }
+                    } else if (curT === 0) {
+                        //house_fixed.style.display='none';
+                    } else {
+                        targetObj = {left: -(step2) * outerWidth};
                         move2();
                         return;
-                    } else {
-                        step2++;
-                        targetObj = {left: left - (outerWidth)};
-                        move2();
-                        curT = 0;
                     }
-                }else if (curT === 0){
-                    //house_fixed.style.display='none';
-                }else {
-                    targetObj = {left: -(step2) * outerWidth};
-                    move2();
-                    return;
                 }
             });
             function move2() {
