@@ -119,15 +119,18 @@ for(var j= 0,len=pic_img.length;j<len;j++){
             }
             dix= query('#fixUl'),dix_img=queryAll('.house-fixed img'),step2=step;
             dix.addEventListener('touchstart', function (e) {
+                e.preventDefault();
                 startLeft = e.targetTouches[0].pageX;
                 left = getCss(dix, 'left');
             });
             dix.addEventListener('touchmove', function (e) {
+                e.preventDefault();
                 var endLeft = e.targetTouches[0].pageX;
                 curT = endLeft - startLeft;
                 dix.style.left = left + curT + 'px'
             });
             dix.addEventListener('touchend', function (e) {
+                e.preventDefault();
                 if (curT > 50) {
                     if (step2 === 0) {
                         targetObj = {left: 0};
