@@ -83,168 +83,168 @@ pic_top_ul.addEventListener('touchend', function (e) {
     }
 });
 var bool=true;
-for(var j= 0,len=pic_img.length;j<len;j++){
-    (function(j){
-        pic_img[j].onclick=function(){
-            document.body.style.overflow='hidden';
-            var litLeft=getCss(pic_top_ul,"left");
-            var imgs=queryAll('.house-pic .top-pic div'),str='',dix;
-            //if(bool){
-            //str+='<div style="width:'+ getCss(pic_top_ul,"width")+'px;'+'left:'+  litLeft+'px" class="row absolute" id="fixUl">';
-            //for(var k=0;k<imgs.length;k++){
-            //    str+='<div><img src="'+ pic_img[k].src+'" alt="" ></div>';
-            //}
-            //str+='</div>';
-            //house_fixed.innerHTML=str;
-            //bool=false;
-            house_fixed.style.display='block';
-            //document.body.style.overflow='hidden';
-                var oimgs=house_fixed.querySelectorAll('img');
-                for(var x=0;x<len;x++){
-                    var xh=getCss(oimgs[x],'height')/2+'px';
-                    //console.log('-'+xh)
-                   setCss(oimgs[x],'margin-top','-'+xh)
-                }
-            //}else {
-            // setCss(query('#fixUl'),'left',litLeft);
-            // house_fixed.style.display='block';
-            //    document.bo.style.overflow='hidden'
-            //}
-            dix= query('#fixUl'),dix_img=queryAll('.house-fixed img'),step2=step;
-            dix.addEventListener('touchstart', function (e) {
-                if(e.touches.length===2){
-                    var strLeft1=e.touches[0].pageX;
-                    var strLeft2=e.touches[1].pageX;
-                    var strTop1=e.touches[0].pageY;
-                    var strTop2=e.touches[1].pageY;
-                    var w=   window.getComputedStyle(e.target,null)['width']
-                    var h=   window.getComputedStyle(e.target,null)['height']
-                    dix.addEventListener('touchmove', function (e) {
-                        //var endLeft = e.targetTouches[0].pageX;
-                        var endLeft1=e.touches[0].pageX;
-                        var endLeft2=e.touches[1].pageX;
-                        var endTop1=e.touches[0].pageY;
-                        var endTop2=e.touches[1].pageY;
-                        if(endLeft1-strLeft1>0||endLeft2-strLeft2>0||endTop1-strTop1>0||endTop2-strTop2>0){
-
-                            e.target.style.width=function(){
-                                var Lw=endLeft1-strLeft1>0?endLeft1-strLeft1:endLeft2-strLeft2;
-                                    return  parseFloat(w)+Lw+'px';
-                            }
-
-                            e.target.style.height=function(){
-                                    var Lh=endTop1-strTop1>0?endTop1-strTop1:endTop2-strTop2;
-                                    return  parseFloat(h)+Lh+'px';
-                        }
-                                //parseFloat(h)+(endTop1-strTop1)+(endTop2-strTop2)+'px';
-                            e.target.style.left=parseFloat(w)/2*-1+'px';
-                            e.target.style.top=parseFloat(h)/2*-1+'px';
-                        }
-                        //curT = endLeft - startLeft;
-                        //dix.style.left = left + curT + 'px'
-                    });
-                    dix.addEventListener('touchend', function (e) {
-                        //alert(e.target.style.width+';'+e.target.style.height+';'+e.target.style.left+';'+e.target.style.top)
-                        //if (curT > 50) {
-                        //    if (step2 === 0) {
-                        //        targetObj = {left: 0};
-                        //        move2();
-                        //    } else {
-                        //        step2--;
-                        //        targetObj = {left: left + (outerWidth)};
-                        //        move2();
-                        //        curT = 0;
-                        //    }
-                        //} else if (curT < -50) {
-                        //    if (step2 === count - 1) {
-                        //        targetObj = {left: -(dix_img.length - 1) * outerWidth};
-                        //        move2();
-                        //        return;
-                        //    } else {
-                        //        step2++;
-                        //        targetObj = {left: left - (outerWidth)};
-                        //        move2();
-                        //        curT = 0;
-                        //    }
-                        //} else {
-                        //    targetObj = {left: -(step2) * outerWidth};
-                        //    move2();
-                        //    return;
-                        //}
-                    });
-
-                }else {
-                    startLeft = e.targetTouches[0].pageX;
-                    left = getCss(dix, 'left');
-                    dix.addEventListener('touchmove', function (e) {
-                        var endLeft = e.targetTouches[0].pageX;
-                        curT = endLeft - startLeft;
-                        dix.style.left = left + curT + 'px'
-                    });
-                    dix.addEventListener('touchend', function (e) {
-                        //window.getComputedStyle(e.target,null)['width']
-                        //console.log(window.getComputedStyle(e.target,null)['width'])
-                        //console.log(e.target.style.width+';'+e.target.style.height+';'+e.target.style.left+';'+e.target.style.top)
-                        if (curT > 50) {
-                            if (step2 === 0) {
-                                targetObj = {left: 0};
-                                move2();
-                            } else {
-                                step2--;
-                                targetObj = {left: left + (outerWidth)};
-                                move2();
-                                curT = 0;
-                            }
-                        } else if (curT < -50) {
-                            if (step2 === count - 1) {
-                                targetObj = {left: -(dix_img.length - 1) * outerWidth};
-                                move2();
-                                return;
-                            } else {
-                                step2++;
-                                targetObj = {left: left - (outerWidth)};
-                                move2();
-                                curT = 0;
-                            }
-                        } else {
-                            targetObj = {left: -(step2) * outerWidth};
-                            move2();
-                            return;
-                        }
-                    });
-                    function move2() {
-                        for (var key in targetObj) {
-                            if (targetObj.hasOwnProperty(key)) {
-                                beginObj[key] = getCss( dix, key);
-                                changeObj[key] = targetObj[key] - beginObj[key];
-                            }
-                        }
-                        window.clearTimeout(timer2);
-                        window.clearTimeout(timer);
-                        time += 10;
-                        if (time >= duration) {
-                            for (var key in targetObj) {
-                                if (targetObj.hasOwnProperty(key)) {
-                                    setCss( dix, key, targetObj[key]);
-                                }
-                            }
-                            time = 0;
-                            return;
-                        }
-                        for (key in targetObj) {
-                            if (targetObj.hasOwnProperty(key)) {
-                                var curPos = linear(time, beginObj[key], changeObj[key], duration);
-                                setCss( dix, key, curPos);
-                            }
-                        }
-                        timer2 = window.setTimeout(move2, 10);
-                    }
-                }
-            });
-
-        }
-    })(j)
-}
+//for(var j= 0,len=pic_img.length;j<len;j++){
+//    (function(j){
+//        pic_img[j].onclick=function(){
+//            document.body.style.overflow='hidden';
+//            var litLeft=getCss(pic_top_ul,"left");
+//            var imgs=queryAll('.house-pic .top-pic div'),str='',dix;
+//            //if(bool){
+//            //str+='<div style="width:'+ getCss(pic_top_ul,"width")+'px;'+'left:'+  litLeft+'px" class="row absolute" id="fixUl">';
+//            //for(var k=0;k<imgs.length;k++){
+//            //    str+='<div><img src="'+ pic_img[k].src+'" alt="" ></div>';
+//            //}
+//            //str+='</div>';
+//            //house_fixed.innerHTML=str;
+//            //bool=false;
+//            house_fixed.style.display='block';
+//            //document.body.style.overflow='hidden';
+//                var oimgs=house_fixed.querySelectorAll('img');
+//                for(var x=0;x<len;x++){
+//                    var xh=getCss(oimgs[x],'height')/2+'px';
+//                    //console.log('-'+xh)
+//                   setCss(oimgs[x],'margin-top','-'+xh)
+//                }
+//            //}else {
+//            // setCss(query('#fixUl'),'left',litLeft);
+//            // house_fixed.style.display='block';
+//            //    document.bo.style.overflow='hidden'
+//            //}
+//            dix= query('#fixUl'),dix_img=queryAll('.house-fixed img'),step2=step;
+//            dix.addEventListener('touchstart', function (e) {
+//                if(e.touches.length===2){
+//                    var strLeft1=e.touches[0].pageX;
+//                    var strLeft2=e.touches[1].pageX;
+//                    var strTop1=e.touches[0].pageY;
+//                    var strTop2=e.touches[1].pageY;
+//                    var w=   window.getComputedStyle(e.target,null)['width']
+//                    var h=   window.getComputedStyle(e.target,null)['height']
+//                    dix.addEventListener('touchmove', function (e) {
+//                        //var endLeft = e.targetTouches[0].pageX;
+//                        var endLeft1=e.touches[0].pageX;
+//                        var endLeft2=e.touches[1].pageX;
+//                        var endTop1=e.touches[0].pageY;
+//                        var endTop2=e.touches[1].pageY;
+//                        if(endLeft1-strLeft1>0||endLeft2-strLeft2>0||endTop1-strTop1>0||endTop2-strTop2>0){
+//
+//                            e.target.style.width=function(){
+//                                var Lw=endLeft1-strLeft1>0?endLeft1-strLeft1:endLeft2-strLeft2;
+//                                    return  parseFloat(w)+Lw+'px';
+//                            }
+//
+//                            e.target.style.height=function(){
+//                                    var Lh=endTop1-strTop1>0?endTop1-strTop1:endTop2-strTop2;
+//                                    return  parseFloat(h)+Lh+'px';
+//                        }
+//                                //parseFloat(h)+(endTop1-strTop1)+(endTop2-strTop2)+'px';
+//                            e.target.style.left=parseFloat(w)/2*-1+'px';
+//                            e.target.style.top=parseFloat(h)/2*-1+'px';
+//                        }
+//                        //curT = endLeft - startLeft;
+//                        //dix.style.left = left + curT + 'px'
+//                    });
+//                    dix.addEventListener('touchend', function (e) {
+//                        //alert(e.target.style.width+';'+e.target.style.height+';'+e.target.style.left+';'+e.target.style.top)
+//                        //if (curT > 50) {
+//                        //    if (step2 === 0) {
+//                        //        targetObj = {left: 0};
+//                        //        move2();
+//                        //    } else {
+//                        //        step2--;
+//                        //        targetObj = {left: left + (outerWidth)};
+//                        //        move2();
+//                        //        curT = 0;
+//                        //    }
+//                        //} else if (curT < -50) {
+//                        //    if (step2 === count - 1) {
+//                        //        targetObj = {left: -(dix_img.length - 1) * outerWidth};
+//                        //        move2();
+//                        //        return;
+//                        //    } else {
+//                        //        step2++;
+//                        //        targetObj = {left: left - (outerWidth)};
+//                        //        move2();
+//                        //        curT = 0;
+//                        //    }
+//                        //} else {
+//                        //    targetObj = {left: -(step2) * outerWidth};
+//                        //    move2();
+//                        //    return;
+//                        //}
+//                    });
+//
+//                }else {
+//                    startLeft = e.targetTouches[0].pageX;
+//                    left = getCss(dix, 'left');
+//                    dix.addEventListener('touchmove', function (e) {
+//                        var endLeft = e.targetTouches[0].pageX;
+//                        curT = endLeft - startLeft;
+//                        dix.style.left = left + curT + 'px'
+//                    });
+//                    dix.addEventListener('touchend', function (e) {
+//                        //window.getComputedStyle(e.target,null)['width']
+//                        //console.log(window.getComputedStyle(e.target,null)['width'])
+//                        //console.log(e.target.style.width+';'+e.target.style.height+';'+e.target.style.left+';'+e.target.style.top)
+//                        if (curT > 50) {
+//                            if (step2 === 0) {
+//                                targetObj = {left: 0};
+//                                move2();
+//                            } else {
+//                                step2--;
+//                                targetObj = {left: left + (outerWidth)};
+//                                move2();
+//                                curT = 0;
+//                            }
+//                        } else if (curT < -50) {
+//                            if (step2 === count - 1) {
+//                                targetObj = {left: -(dix_img.length - 1) * outerWidth};
+//                                move2();
+//                                return;
+//                            } else {
+//                                step2++;
+//                                targetObj = {left: left - (outerWidth)};
+//                                move2();
+//                                curT = 0;
+//                            }
+//                        } else {
+//                            targetObj = {left: -(step2) * outerWidth};
+//                            move2();
+//                            return;
+//                        }
+//                    });
+//                    function move2() {
+//                        for (var key in targetObj) {
+//                            if (targetObj.hasOwnProperty(key)) {
+//                                beginObj[key] = getCss( dix, key);
+//                                changeObj[key] = targetObj[key] - beginObj[key];
+//                            }
+//                        }
+//                        window.clearTimeout(timer2);
+//                        window.clearTimeout(timer);
+//                        time += 10;
+//                        if (time >= duration) {
+//                            for (var key in targetObj) {
+//                                if (targetObj.hasOwnProperty(key)) {
+//                                    setCss( dix, key, targetObj[key]);
+//                                }
+//                            }
+//                            time = 0;
+//                            return;
+//                        }
+//                        for (key in targetObj) {
+//                            if (targetObj.hasOwnProperty(key)) {
+//                                var curPos = linear(time, beginObj[key], changeObj[key], duration);
+//                                setCss( dix, key, curPos);
+//                            }
+//                        }
+//                        timer2 = window.setTimeout(move2, 10);
+//                    }
+//                }
+//            });
+//
+//        }
+//    })(j)
+//}
 
 house_fixed.onclick=function(){
     house_fixed.style.display='none';
@@ -261,7 +261,9 @@ function changeTip() {
             try {
 
                 pic_bot_li[i].className = " ";
+
             } catch (e) {
+
             }
         }
     }
