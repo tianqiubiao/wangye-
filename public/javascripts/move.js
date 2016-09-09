@@ -89,6 +89,7 @@ for(var j= 0,len=pic_img.length;j<len;j++){
         pic_img[j].onclick=function(){
             var litLeft=getCss(pic_top_ul,"left");
             var imgs=queryAll('.house-pic .top-pic div'),str='',dix;
+            setCss(document.body||document.documentElement,'overflow','hidden')
             if(bool){
                 str+='<div style="width:'+ getCss(pic_top_ul,"width")+'px;'+'left:'+  litLeft+'px" class="row absolute" id="fixUl">';
                 for(var k=0;k<imgs.length;k++){
@@ -186,7 +187,8 @@ for(var j= 0,len=pic_img.length;j<len;j++){
 }
 
 house_fixed.onclick=function(){
-    house_fixed.style.display='none'
+    setCss(document.body||document.documentElement,'overflow','auto')
+    house_fixed.style.display='none';
 };
 function changeList() {
     item_lists.innerHTML = step + 1 + '/' + pic_img.length
