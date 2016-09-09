@@ -123,7 +123,7 @@ for(var j= 0,len=pic_img.length;j<len;j++){
                         var endTop2=e.touches[1].pageY;
                         if(endLeft1-strLeft1>0||endLeft2-strLeft2>0||endTop1-strTop1>0||endTop2-strTop2>0){
                             e.target.style.width=parseFloat(e.target.style.width)+(endLeft1-strLeft1)+(endLeft2-strLeft2)+'px';
-                            e.target.style.height=parseFloat(e.target.style.height))+(endTop1-strTop1)+(endTop2-strTop2)+'px';
+                            e.target.style.height=parseFloat(e.target.style.height)+(endTop1-strTop1)+(endTop2-strTop2)+'px';
                             e.target.style.left=parseFloat(e.target.style.width)/2+'px';
                             e.target.style.top=parseFloat(e.target.style.height)/2+'px';
                         }
