@@ -124,16 +124,25 @@ for(var j= 0,len=pic_img.length;j<len;j++){
                         var endTop1=e.touches[0].pageY;
                         var endTop2=e.touches[1].pageY;
                         if(endLeft1-strLeft1>0||endLeft2-strLeft2>0||endTop1-strTop1>0||endTop2-strTop2>0){
-                            e.target.style.width=parseFloat(w)+(endLeft1-strLeft1)+(endLeft2-strLeft2)+'px';
-                            e.target.style.height=parseFloat(h)+(endTop1-strTop1)+(endTop2-strTop2)+'px';
+
+                            e.target.style.width=function(){
+                                var Lw=endLeft1-strLeft1>0?endLeft1-strLeft1:endLeft2-strLeft2;
+                                    return  parseFloat(w)+Lw)+'px';
+                            }
+
+                            e.target.style.height=function(){
+                                    var Lh=endTop1-strTop1>0?endTop1-strTop1:endTop2-strTop2;
+                                    return  parseFloat(h)+Lh)+'px';
+                        }
+                                //parseFloat(h)+(endTop1-strTop1)+(endTop2-strTop2)+'px';
                             e.target.style.left=parseFloat(w)/2+'px';
                             e.target.style.top=parseFloat(h)/2+'px';
                         }
-                        curT = endLeft - startLeft;
-                        dix.style.left = left + curT + 'px'
+                        //curT = endLeft - startLeft;
+                        //dix.style.left = left + curT + 'px'
                     });
                     dix.addEventListener('touchend', function (e) {
-                        alert(e.target.style.width+';'+e.target.style.height+';'+e.target.style.left+';'+e.target.style.top)
+                        //alert(e.target.style.width+';'+e.target.style.height+';'+e.target.style.left+';'+e.target.style.top)
                         //if (curT > 50) {
                         //    if (step2 === 0) {
                         //        targetObj = {left: 0};
