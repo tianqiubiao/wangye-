@@ -103,6 +103,9 @@ for(var j= 0,len=pic_img.length;j<len;j++){
                 var oimgs=house_fixed.querySelectorAll('img');
                 for(var x=0;x<len;x++){
                     (function(x){
+                        queryAll('#fixUl div')[x].onclick=function(){
+                            house_fixed.style.display='none';
+                        };
                         oimgs[x].onload=function(){
                             var xh=getCss(oimgs[x],'height')/2+'px';
                             setCss(oimgs[x],'margin-top','-'+xh);
@@ -119,7 +122,6 @@ for(var j= 0,len=pic_img.length;j<len;j++){
             }
             dix= query('#fixUl'),dix_img=queryAll('.house-fixed img'),step2=step;
             dix.addEventListener('touchstart', function (e) {
-                e.preventDefault();
                 startLeft = e.targetTouches[0].pageX;
                 left = getCss(dix, 'left');
             });
@@ -130,7 +132,6 @@ for(var j= 0,len=pic_img.length;j<len;j++){
                 dix.style.left = left + curT + 'px'
             });
             dix.addEventListener('touchend', function (e) {
-                e.preventDefault();
                 if (curT > 50) {
                     if (step2 === 0) {
                         targetObj = {left: 0};
@@ -152,7 +153,9 @@ for(var j= 0,len=pic_img.length;j<len;j++){
                         move2();
                         curT = 0;
                     }
-                } else {
+                }else if (curT === 0){
+                    //house_fixed.style.display='none';
+                }else {
                     targetObj = {left: -(step2) * outerWidth};
                     move2();
                     return;
@@ -189,10 +192,7 @@ for(var j= 0,len=pic_img.length;j<len;j++){
     })(j)
 }
 
-house_fixed.onclick=function(){
-    setCss(document.body||document.documentElement,'overflow','auto')
-    house_fixed.style.display='none';
-};
+
 function changeList() {
     item_lists.innerHTML = step + 1 + '/' + pic_img.length
 }
