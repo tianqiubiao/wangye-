@@ -101,7 +101,7 @@ for(var j= 0,len=pic_img.length;j<len;j++){
                 var oimgs=house_fixed.querySelectorAll('img');
                 for(var x=0;x<len;x++){
                     var xh=getCss(oimgs[x],'height')/2+'px';
-                    console.log('-'+xh)
+                    //console.log('-'+xh)
                    setCss(oimgs[x],'margin-top','-'+xh)
                 }
             }else {
@@ -122,10 +122,12 @@ for(var j= 0,len=pic_img.length;j<len;j++){
                         var endTop1=e.touches[0].pageY;
                         var endTop2=e.touches[1].pageY;
                         if(endLeft1-strLeft1>0||endLeft2-strLeft2>0||endTop1-strTop1>0||endTop2-strTop2>0){
-                            e.target.style.width=parseFloat(e.target.style.width)+(endLeft1-strLeft1)+(endLeft2-strLeft2)+'px';
-                            e.target.style.height=parseFloat(e.target.style.height)+(endTop1-strTop1)+(endTop2-strTop2)+'px';
-                            e.target.style.left=parseFloat(e.target.style.width)/2+'px';
-                            e.target.style.top=parseFloat(e.target.style.height)/2+'px';
+                          var w=   window.getComputedStyle(e.target,null)['width']
+                          var h=   window.getComputedStyle(e.target,null)['height']
+                            e.target.style.width=parseFloat(w)+(endLeft1-strLeft1)+(endLeft2-strLeft2)+'px';
+                            e.target.style.height=parseFloat(h)+(endTop1-strTop1)+(endTop2-strTop2)+'px';
+                            e.target.style.left=parseFloat(w)/2+'px';
+                            e.target.style.top=parseFloat(h)/2+'px';
                         }
                         curT = endLeft - startLeft;
                         dix.style.left = left + curT + 'px'
@@ -169,6 +171,9 @@ for(var j= 0,len=pic_img.length;j<len;j++){
                         dix.style.left = left + curT + 'px'
                     });
                     dix.addEventListener('touchend', function (e) {
+                        //window.getComputedStyle(e.target,null)['width']
+                        console.log(window.getComputedStyle(e.target,null)['width'])
+                        console.log(e.target.style.width+';'+e.target.style.height+';'+e.target.style.left+';'+e.target.style.top)
                         if (curT > 50) {
                             if (step2 === 0) {
                                 targetObj = {left: 0};
