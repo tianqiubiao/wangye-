@@ -72,12 +72,12 @@
                                      if(ec>c){//放大
                                         c=ec;
                                          var wid=img.style.width;
-                                         img.style.width=wid++;
+                                         img.style.width=wid++ +'px';
                                          q='放大'
                                      }else if(c>ec){//缩小
                                          c=ec;
                                          var wid=img.style.width;
-                                         img.style.width=wid--;
+                                         img.style.width=wid--+'px';
                                          q='缩小'
                                      }else {
 q='无'
