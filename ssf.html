@@ -71,19 +71,21 @@
 //移动方向
                                      if(ec>c){//放大
                                         c=ec;
-                                         var wid=img.style.width;
-                                         img.style.width=wid++ +'px';
+                                         var wid=parseFloat( window.getComputedStyle(img,null)['width']);
+                                         img.style.width=wid+1 +'px';
                                          q='放大'
                                      }else if(c>ec){//缩小
                                          c=ec;
-                                         var wid=img.style.width;
-                                         img.style.width=wid--+'px';
+                                         var wid=parseFloat(window.getComputedStyle(img,null)['width']);
+                                         img.style.width=wid-1+'px';
                                          q='缩小'
                                      }else {
 q='无'
                                      }
-                                     div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+Math.sqrt(ec)+'<br>状态：'+q+'<br>图片宽'+img.style.width;
+                                     div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+Math.sqrt(ec)+'<br>状态：'+q+'<br>图片宽'+window.getComputedStyle(img,null)['width'];
                                  } else {
+//                                     var wi=parseFloat(window.getComputedStyle(img,null)['width']);
+//                                     img.style.width=wi+1 +'px';
 //                var endLeft = e.targetTouches[0].pageX;
 //                curT = endLeft - startLeft;
 //                dix.style.left = left + curT + 'px'
@@ -93,7 +95,8 @@ q='无'
         img.addEventListener('touchend', function (e) {
                                       div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+0+'<br>初始间距：'+0;
                                        c=0;
-
+//            console.log(window.getComputedStyle(img,null)['width']);
+//console.log(img.style.width)
 
                              }
         )
