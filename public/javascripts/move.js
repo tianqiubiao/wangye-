@@ -48,7 +48,7 @@ pic_top_ul.addEventListener('touchstart', function (e) {
     //console.log(e.touches)
 });
 pic_top_ul.addEventListener('touchmove', function (e) {
-    e.preventDefault();
+    //e.preventDefault();
     var endLeft = e.targetTouches[0].pageX;
     curT = endLeft - startLeft;
     pic_top_ul.style.left = left + curT + 'px'
