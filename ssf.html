@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <script>
+        ;
+        (function (doc, win) {
+            var docEl = doc.documentElement, statWidth = docEl.clientWidth,
+                resizeEvt                              = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc                                 = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    docEl.style.fontSize = 100 * (clientWidth / 360) + 'px';
+                };
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+    </script>
+    <link rel="stylesheet" href="public/stylesheets/app.css">
+    <title>Title</title>
+</head>
+<body>
+<div style=";top: 0;" class="fixed colorWhite" id="aDiv"></div>
+<div class="min-height100 bgG2 padTop25">
+    <div><img src="public/images/b2.jpg" alt="" id="aImg"></div>
+</div>
+</body>
+</html>
+<script src="public/javascripts/app.js"></script>
+<script>
+    var img = query('#aImg'), div = query('#aDiv'), x, y, x1, y1,c;
+    img.onload = function () {
+        img.style.maxWidth = '1000%';
+        img.addEventListener('touchstart', function (e) {
+                                 //alert(e.touches.length)
+                                 if (e.touches.length === 2) {
+                                     var a, b, c, a,sb,sc;
+                                     y = e.targetTouches[0].pageY;
+                                     x = e.targetTouches[0].pageX;
+                                     y1 = e.targetTouches[1].pageY;
+                                     x1 = e.targetTouches[1].pageX;
+                                     //计算三角两边;
+                                     sb= x>x1?x-x1:x1-x;
+                                     sa= y>y1?y-y1:y1-y;
+                                     c=sb*sb+sa*sa;
+                                     div.innerHTML = '手指数：' + e.touches.length + '<br>宽:' + +'<br>高：' + ' ';
+                                 } else {
+//                startLeft = e.targetTouches[0].pageX;
+//                left = getCss(dix, 'left');
+                                 }
+                             }
+        );
+        img.addEventListener('touchmove', function (e) {
+                                 e.preventDefault();
+                                 if (e.touches.length === 2) {
+                                     var t, f, t1, f1,a, b, c,ea,eb,ec;
+                                     t = e.targetTouches[0].pageY - y;
+                                     t1 = e.targetTouches[1].pageY - y1;
+                                     f1 = e.targetTouches[1].pageX - x1;
+                                     f = e.targetTouches[0].pageX - x;
+//放大、缩小值为对立的；
+  //a:y轴  ，b:x轴   c：斜边；
+                                     ea= t>t1?t-t1:t1-t;
+                                     eb= f>f1?f-f1:f1-f;
+                                     ec=ea*ea+eb*eb;
+
+                                     div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+ec;
+                                 } else {
+//                var endLeft = e.targetTouches[0].pageX;
+//                curT = endLeft - startLeft;
+//                dix.style.left = left + curT + 'px'
+                                 }
+                             }
+        );
+        img.addEventListener('touchend', function (e) {
+                                 //console.log(e.targetTouches)
+//                                 this.width++
+//                                 if (e.touches.length === 2) {
+//                                     var that;
+//                                     if (this.tagName.toLocaleLowerCase() === 'img') {
+//                                         that = this;
+//                                     } else if (this.firstElementChild.tagName.toLocaleLowerCase() === 'img') {
+//                                         that = this.firstElementChild
+//                                     } else {
+//                                         return
+//                                     }
+//                                     that.width++;
+//
+//                                 } else {
+//
+//                                 }
+                             }
+        )
+    }
+
+
+</script>
