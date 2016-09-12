@@ -27,17 +27,28 @@
     <div style="height: 1.5rem;" class="colorWhite font20 line_height30" id="aDiv" ></div>
     <div><img src="public/images/b2.jpg" alt="" id="aImg"></div>
 </div>
+
+<select style="width: 100%;position: fixed;top: 0;" id="scl">
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>5</option>
+    <option>6</option>
+</select>
 </body>
 </html>
 <script src="public/javascripts/app.js"></script>
 <script>
-    var img = query('#aImg'), div = query('#aDiv'), x, y, x1, y1, c
+    var img = query('#aImg'), div = query('#aDiv'), x, y, x1, y1, c,scl = query('#scl'),num=1;
+    scl.onchange=function(){
+        num=scl.value;
+    }
     img.onload = function () {
         img.style.maxWidth = '1000%';
         img.addEventListener('touchstart', function (e) {
                                  //alert(e.touches.length)
                                  if (e.touches.length === 2) {
-                                     var a, b, a,sb,sc;
+                                     var a, b,sb,sc;
                                      y = e.targetTouches[0].pageY;
                                      x = e.targetTouches[0].pageX;
                                      y1 = e.targetTouches[1].pageY;
@@ -64,20 +75,19 @@
                                      f = e.targetTouches[0].pageX;
 //放大、缩小值为对立的；
   //a:y轴  ，b:x轴   c：斜边；
-                                     var q;
+                                     var q,wid;
                                      ea= t>t1?t-t1:t1-t;
                                      eb= f>f1?f-f1:f1-f;
                                      ec=ea*ea+eb*eb;
-//移动方向
                                      if(ec>c){//放大
                                         c=ec;
-                                         var wid=parseFloat( window.getComputedStyle(img,null)['width']);
-                                         img.style.width=wid+1 +'px';
+                                          wid=parseFloat( window.getComputedStyle(img,null)['width']);
+                                         img.style.width=wid+num +'px';
                                          q='放大'
                                      }else if(c>ec){//缩小
                                          c=ec;
-                                         var wid=parseFloat(window.getComputedStyle(img,null)['width']);
-                                         img.style.width=wid-1+'px';
+                                          wid=parseFloat(window.getComputedStyle(img,null)['width']);
+                                         img.style.width=wid-num+'px';
                                          q='缩小'
                                      }else {
 q='无'
