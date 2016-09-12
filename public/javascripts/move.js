@@ -54,7 +54,7 @@ pic_top_ul.addEventListener('touchmove', function (e) {
     pic_top_ul.style.left = left + curT + 'px'
 });
 pic_top_ul.addEventListener('touchend', function (e) {
-    if (curT > 50) {
+    if (curT > 10) {
         if (step === 0) {
             move_tar=pic_top_ul;
             targetObj = {left: 0};
@@ -68,7 +68,7 @@ pic_top_ul.addEventListener('touchend', function (e) {
             changeList();
             changeTip();
         }
-    } else if (curT < -50) {
+    } else if (curT < -10) {
         if (step === count - 1) {
             move_tar=pic_top_ul;
             targetObj = {left: -(pic_img.length - 1) * outerWidth};
@@ -161,7 +161,7 @@ for(var j= 0,len=pic_img.length;j<len;j++){
                    that.width++;
 
                 }else {
-                    if (curT > 50) {
+                    if (curT > 10) {
                         if (step2 === 0) {
                             move_tar= dix;
                             targetObj = {left: 0};
@@ -174,7 +174,7 @@ for(var j= 0,len=pic_img.length;j<len;j++){
                             curT = 0;
                             step2--;
                         }
-                    } else if (curT < -50) {
+                    } else if (curT < -10) {
                         if (step2 === count - 1) {
                             move_tar= dix;
                             targetObj = {left: -(dix_img.length - 1) * outerWidth};
