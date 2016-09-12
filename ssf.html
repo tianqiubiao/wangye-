@@ -66,7 +66,7 @@
                                      eb= f>f1?f-f1:f1-f;
                                      ec=ea*ea+eb*eb;
 
-                                     div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+ec+'<br>初始间距：'+c;
+                                     div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+Math.sqrt(ec)+'<br>初始间距：'+Math.sqrt(c);
                                  } else {
 //                var endLeft = e.targetTouches[0].pageX;
 //                curT = endLeft - startLeft;
