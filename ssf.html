@@ -58,10 +58,10 @@
                                  e.preventDefault();
                                  if (e.touches.length === 2) {
                                      var t, f, t1, f1,a, b,ea,eb,ec;
-                                     t = e.targetTouches[0].pageY - y;
-                                     t1 = e.targetTouches[1].pageY - y1;
-                                     f1 = e.targetTouches[1].pageX - x1;
-                                     f = e.targetTouches[0].pageX - x;
+                                     t = e.targetTouches[0].pageY;
+                                     t1 = e.targetTouches[1].pageY ;
+                                     f1 = e.targetTouches[1].pageX;
+                                     f = e.targetTouches[0].pageX;
 //放大、缩小值为对立的；
   //a:y轴  ，b:x轴   c：斜边；
                                      ea= t>t1?t-t1:t1-t;
