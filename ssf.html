@@ -46,6 +46,8 @@
                                      sb= x>x1?x-x1:x1-x;
                                      sa= y>y1?y-y1:y1-y;
                                      c=sb*sb+sa*sa;
+                                     div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+Math.sqrt(c)+'<br>初始间距：'+Math.sqrt(c);
+
                                  } else {
 //                startLeft = e.targetTouches[0].pageX;
 //                left = getCss(dix, 'left');
@@ -75,6 +77,8 @@
                              }
         );
         img.addEventListener('touchend', function (e) {
+                                 div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+0+'<br>初始间距：'+0;
+
                                  //console.log(e.targetTouches)
 //                                 this.width++
 //                                 if (e.touches.length === 2) {
