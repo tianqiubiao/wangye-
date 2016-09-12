@@ -31,7 +31,7 @@
 </html>
 <script src="public/javascripts/app.js"></script>
 <script>
-    var img = query('#aImg'), div = query('#aDiv'), x, y, x1, y1,c;
+    var img = query('#aImg'), div = query('#aDiv'), x, y, x1, y1, c
     img.onload = function () {
         img.style.maxWidth = '1000%';
         img.addEventListener('touchstart', function (e) {
@@ -64,11 +64,25 @@
                                      f = e.targetTouches[0].pageX;
 //放大、缩小值为对立的；
   //a:y轴  ，b:x轴   c：斜边；
+                                     var q;
                                      ea= t>t1?t-t1:t1-t;
                                      eb= f>f1?f-f1:f1-f;
                                      ec=ea*ea+eb*eb;
-
-                                     div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+Math.sqrt(ec)+'<br>初始间距：'+Math.sqrt(c);
+//移动方向
+                                     if(ec>c){//放大
+                                        c=ec;
+                                         var wid=img.style.width;
+                                         img.style.width=wid++;
+                                         q='放大'
+                                     }else if(c>ec){//缩小
+                                         c=ec;
+                                         var wid=img.style.width;
+                                         img.style.width=wid--;
+                                         q='缩小'
+                                     }else {
+q='无'
+                                     }
+                                     div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+Math.sqrt(ec)+'<br>状态：'+q;
                                  } else {
 //                var endLeft = e.targetTouches[0].pageX;
 //                curT = endLeft - startLeft;
@@ -77,24 +91,10 @@
                              }
         );
         img.addEventListener('touchend', function (e) {
-                                 div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+0+'<br>初始间距：'+0;
+                                      div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+0+'<br>初始间距：'+0;
+                                       c=0;
 
-                                 //console.log(e.targetTouches)
-//                                 this.width++
-//                                 if (e.touches.length === 2) {
-//                                     var that;
-//                                     if (this.tagName.toLocaleLowerCase() === 'img') {
-//                                         that = this;
-//                                     } else if (this.firstElementChild.tagName.toLocaleLowerCase() === 'img') {
-//                                         that = this.firstElementChild
-//                                     } else {
-//                                         return
-//                                     }
-//                                     that.width++;
-//
-//                                 } else {
-//
-//                                 }
+
                              }
         )
     }
