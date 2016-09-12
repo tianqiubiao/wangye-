@@ -12,7 +12,7 @@ var pic_top_ul = query('.house-pic .top-pic ul'),
     step = 0, count = pic_img.length,
     item_lists = query('.item-lists'),
     outerWidth = document.body.clientWidth || document.documentElement.clientWidth,
-    duration = 500,
+    duration = 300,
     time = 0,
     timer,
     timer2,
@@ -20,7 +20,8 @@ var pic_top_ul = query('.house-pic .top-pic ul'),
     changeObj = {},
     beginObj = {},
     ary_item = 0,
-    dix;
+    dix,
+    move_tar;
 pic_top_ul.style.width = pic_img.length * outerWidth + 'px';
 for (var i = 0; i < pic_bot_li.length; i++) {
     pic_bot_li[i].style.width = 100 / pic_bot_li.length + '%';
@@ -55,30 +56,35 @@ pic_top_ul.addEventListener('touchmove', function (e) {
 pic_top_ul.addEventListener('touchend', function (e) {
     if (curT > 50) {
         if (step === 0) {
+            move_tar=pic_top_ul;
             targetObj = {left: 0};
             move();
         } else {
-            step--;
-            targetObj = {left: left + (outerWidth)};
+            move_tar=pic_top_ul;
+            targetObj = {left: -(step-1) * (outerWidth)};
             move();
             curT = 0;
+            step--;
             changeList();
             changeTip();
         }
     } else if (curT < -50) {
         if (step === count - 1) {
+            move_tar=pic_top_ul;
             targetObj = {left: -(pic_img.length - 1) * outerWidth};
             move();
             return;
         } else {
-            step++;
-            targetObj = {left: left - (outerWidth)};
+            move_tar=pic_top_ul;
+            targetObj = {left: -(step+1) * (outerWidth)};
             move();
             curT = 0;
+            step++;
             changeList();
             changeTip();
         }
     } else {
+        move_tar=pic_top_ul;
         targetObj = {left: -(step) * outerWidth};
         move();
         return;
@@ -157,61 +163,41 @@ for(var j= 0,len=pic_img.length;j<len;j++){
                 }else {
                     if (curT > 50) {
                         if (step2 === 0) {
+                            move_tar= dix;
                             targetObj = {left: 0};
-                            move2();
+                            move();
                         } else {
-                            step2--;
-                            targetObj = {left: left + (outerWidth)};
-                            move2();
+                            move_tar= dix;
+                            console.log(step2)
+                            targetObj = {left: -(step2) * (outerWidth)};
+                            move();
                             curT = 0;
+                            step2--;
                         }
                     } else if (curT < -50) {
                         if (step2 === count - 1) {
+                            move_tar= dix;
                             targetObj = {left: -(dix_img.length - 1) * outerWidth};
-                            move2();
+                            move();
                             return;
                         } else {
-                            step2++;
-                            targetObj = {left: left - (outerWidth)};
-                            move2();
+                            console.log(step2)
+                            move_tar= dix;
+                            targetObj = {left: -(step2+1) * (outerWidth)};
+                            move();
                             curT = 0;
+                            step2++;
                         }
                     } else if (curT === 0) {
                         //house_fixed.style.display='none';
                     } else {
+                        move_tar= dix;
                         targetObj = {left: -(step2) * outerWidth};
-                        move2();
+                        move();
                         return;
                     }
                 }
             });
-            function move2() {
-                for (var key in targetObj) {
-                    if (targetObj.hasOwnProperty(key)) {
-                        beginObj[key] = getCss( dix, key);
-                        changeObj[key] = targetObj[key] - beginObj[key];
-                    }
-                }
-                window.clearTimeout(timer2);
-                window.clearTimeout(timer);
-                time += 10;
-                if (time >= duration) {
-                    for (var key in targetObj) {
-                        if (targetObj.hasOwnProperty(key)) {
-                            setCss( dix, key, targetObj[key]);
-                        }
-                    }
-                    time = 0;
-                    return;
-                }
-                for (key in targetObj) {
-                    if (targetObj.hasOwnProperty(key)) {
-                        var curPos = linear(time, beginObj[key], changeObj[key], duration);
-                        setCss( dix, key, curPos);
-                    }
-                }
-                timer2 = window.setTimeout(move2, 10);
-            }
         }
     })(j)
 }
@@ -236,16 +222,17 @@ function changeTip() {
 function move() {
     for (var key in targetObj) {
         if (targetObj.hasOwnProperty(key)) {
-            beginObj[key] = getCss(pic_top_ul, key);
+            beginObj[key] = getCss(move_tar, key);
             changeObj[key] = targetObj[key] - beginObj[key];
         }
     }
     window.clearTimeout(timer);
+
     time += 10;
     if (time >= duration) {
         for (var key in targetObj) {
             if (targetObj.hasOwnProperty(key)) {
-                setCss(pic_top_ul, key, targetObj[key]);
+                setCss(move_tar, key, targetObj[key]);
             }
         }
         time = 0;
@@ -254,9 +241,10 @@ function move() {
     for (key in targetObj) {
         if (targetObj.hasOwnProperty(key)) {
             var curPos = linear(time, beginObj[key], changeObj[key], duration);
-            setCss(pic_top_ul, key, curPos);
+            setCss(move_tar, key, curPos);
         }
     }
+
     timer = window.setTimeout(move, 10);
 }
 
