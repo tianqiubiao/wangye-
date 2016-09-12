@@ -37,7 +37,7 @@
         img.addEventListener('touchstart', function (e) {
                                  //alert(e.touches.length)
                                  if (e.touches.length === 2) {
-                                     var a, b, c, a,sb,sc;
+                                     var a, b, a,sb,sc;
                                      y = e.targetTouches[0].pageY;
                                      x = e.targetTouches[0].pageX;
                                      y1 = e.targetTouches[1].pageY;
@@ -46,7 +46,6 @@
                                      sb= x>x1?x-x1:x1-x;
                                      sa= y>y1?y-y1:y1-y;
                                      c=sb*sb+sa*sa;
-                                     div.innerHTML = '手指数：' + e.touches.length + '<br>宽:' + +'<br>高：' + ' ';
                                  } else {
 //                startLeft = e.targetTouches[0].pageX;
 //                left = getCss(dix, 'left');
@@ -56,7 +55,7 @@
         img.addEventListener('touchmove', function (e) {
                                  e.preventDefault();
                                  if (e.touches.length === 2) {
-                                     var t, f, t1, f1,a, b, c,ea,eb,ec;
+                                     var t, f, t1, f1,a, b,ea,eb,ec;
                                      t = e.targetTouches[0].pageY - y;
                                      t1 = e.targetTouches[1].pageY - y1;
                                      f1 = e.targetTouches[1].pageX - x1;
@@ -67,7 +66,7 @@
                                      eb= f>f1?f-f1:f1-f;
                                      ec=ea*ea+eb*eb;
 
-                                     div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+ec;
+                                     div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+ec+'<br>初始间距：'+c;
                                  } else {
 //                var endLeft = e.targetTouches[0].pageX;
 //                curT = endLeft - startLeft;
