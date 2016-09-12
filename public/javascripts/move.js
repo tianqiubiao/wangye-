@@ -123,7 +123,7 @@ for(var j= 0,len=pic_img.length;j<len;j++){
             }
             dix= query('#fixUl'),dix_img=queryAll('.house-fixed img'),step2=step;
             dix.addEventListener('touchstart', function (e) {
-                alert(e.touches.length)
+                //alert(e.touches.length)
                 if(e.touches.length===2){
 
                 }else {
