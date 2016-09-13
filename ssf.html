@@ -23,95 +23,159 @@
     <title>Title</title>
 </head>
 <body style="overflow-x: hidden">
-<div class="min-height100 bgG2 padTop25">
-    <div  class="colorWhite font20 line_height30" id="aDiv" ></div>
-    <div><img src="public/images/b2.jpg" alt="" id="aImg" style="position: relative;left:0px;"></div>
+<div class="min-height100 bgG2 height100">
+    <div class="colorWhite font20 line_height30" id="aDiv"></div>
+    <div class="relative height100" ><img src="public/images/b2.jpg" alt="" id="aImg" style="position: absolute;left:50%;;top: 50%;margin-left: -176.5px;margin-top: -110px"></div>
 </div>
 
-<select style="width: 100%;position: fixed;top: 0;" id="scl"></select>
+<select style="width: 100%;position: fixed;bottom: 0;color: #fff;" class="bgG2" id="scl"></select>
 </body>
 </html>
 <script src="public/javascripts/app.js"></script>
 <script>
-    var img = query('#aImg'), div = query('#aDiv'), x, y, x1, y1, c,scl = query('#scl'),num= 1,str;
+    var img = query('#aImg'), div = query('#aDiv'), x, y, x1, y1, c, scl = query('#scl'), num = 1, str,bool=false;
     //缩放中心点;屏幕中心点
-    var centerSco,pageSco;
+    var centerSco, pageSco;
     //屏幕宽度；
-    var winW=document.documentElement.clientWidth||document.body.clientWidth;
-    var winH=document.documentElement.clientHeight||document.body.clientHeight;
-//    pageSco=(winW*winW)+(winH*winH)
-    pageSco={x:winW/2,y:winH/2};
-    for(var i=1;i<20;i++){
-        str+='<option value="'+i+'">'+i+'</option>';
+    var winW = document.documentElement.clientWidth || document.body.clientWidth;
+    var winH = document.documentElement.clientHeight || document.body.clientHeight;
+    //    pageSco=(winW*winW)+(winH*winH)
+    pageSco = {x: winW / 2, y: winH / 2};
+    for (var i = 1; i <= 20; i++) {
+        str += '<option value="' + i + '">' + i + '</option>';
     }
-    scl.innerHTML=str;
-    scl.onchange=function(){
-        num=scl.value;
+    scl.innerHTML = str;
+    scl.onchange = function () {
+        num = scl.value;
     }
-
+    img.style.maxWidth = '200%';
     img.onload = function () {
-        img.style.maxWidth = '1000%';
+
         document.addEventListener('touchstart', function (e) {
-                                 if (e.touches.length === 2) {
-                                     var a, b,sb,sc;
-                                     y = e.targetTouches[0].pageY;
-                                     x = e.targetTouches[0].pageX;
-                                     y1 = e.targetTouches[1].pageY;
-                                     x1 = e.targetTouches[1].pageX;
-                                     //计算三角两边;
-                                     sb= x>x1?x-x1:x1-x;
-                                     sa= y>y1?y-y1:y1-y;
-                                     c=sb*sb+sa*sa;
-                                     centerSco={x:sb/2,y:sa/2}
-                                     div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+Math.sqrt(c)+'<br>初始间距：'+Math.sqrt(c)+'<br>num:'+num+'<br>屏幕坐标: x:'+pageSco.x+' y'+pageSco.y+'<br>缩放坐标： x：'+centerSco.x+' y:'+centerSco.y;
+                                      if (e.touches.length === 2) {
+                                          var a, b, sb, sc;
+                                          y = e.targetTouches[0].pageY;
+                                          x = e.targetTouches[0].pageX;
+                                          y1 = e.targetTouches[1].pageY;
+                                          x1 = e.targetTouches[1].pageX;
+                                          //计算三角两边;
+                                          sb = x > x1 ? x - x1 : x1 - x;
+                                          sa = y > y1 ? y - y1 : y1 - y;
+                                          c = sb * sb + sa * sa;
+                                          centerSco = {x: sb / 2, y: sa / 2};
+                                          div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：' + Math.sqrt(c) + '<br>初始间距：' + Math.sqrt(c) + '<br>num:' + num + '<br>屏幕坐标: x:' + pageSco.x + ' y' + pageSco.y + '<br>缩放坐标： x：' + centerSco.x + ' y:' + centerSco.y;
 
-                                 } else {
+                                      } else {
 
-                                 }
-                             }
+                                      }
+                                  }
         );
         document.addEventListener('touchmove', function (e) {
 //                                 e.preventDefault();
-                                 if (e.touches.length === 2) {
-                                     var t, f, t1, f1,a, b,ea,eb,ec;
-                                     t = e.targetTouches[0].pageY;
-                                     t1 = e.targetTouches[1].pageY ;
-                                     f1 = e.targetTouches[1].pageX;
-                                     f = e.targetTouches[0].pageX;
-                                //放大、缩小值为对立的；a:y轴  ，b:x轴   c：斜边；
-                                     var q,wid;
-                                     ea= t>t1?t-t1:t1-t;
-                                     eb= f>f1?f-f1:f1-f;
-                                     ec=ea*ea+eb*eb;
-                                     if(ec>c){//放大
-                                        c=ec;
-                                         wid=parseFloat( window.getComputedStyle(img,null)['width']);
-                                         img.style.width=wid+parseFloat(num) +'px';
-                                         img.style.left=-(wid+parseFloat(num))/2 +'px';
+                                      if (e.touches.length === 2) {
+                                          bool=true;
+                                          var t, f, t1, f1, a, b, ea, eb, ec;
+                                          t = e.targetTouches[0].pageY;
+                                          t1 = e.targetTouches[1].pageY;
+                                          f1 = e.targetTouches[1].pageX;
+                                          f = e.targetTouches[0].pageX;
+                                          //放大、缩小值为对立的；a:y轴  ，b:x轴   c：斜边；
+                                          var q, wid;
+                                          ea = t > t1 ? t - t1 : t1 - t;
+                                          eb = f > f1 ? f - f1 : f1 - f;
+                                          ec = ea * ea + eb * eb;
+                                          if (ec > c) {//放大
+                                              c = ec;
+                                              wid = parseFloat(window.getComputedStyle(img, null)['width']);
+                                              img.style.width = wid + parseFloat(num) + 'px';
+                                              img.style.marginLeft = -(wid + parseFloat(num)) / 2 + 'px';
 
-                                         q='放大'
-                                     }else if(c>ec){//缩小
-                                         c=ec;
-                                          wid=parseFloat(window.getComputedStyle(img,null)['width']);
-                                         img.style.width=wid-parseFloat(num)+'px';
-                                         img.style.left=-(wid+parseFloat(num))/2 +'px';
-                                         q='缩小'
-                                     }else {
-                                         q='无'
-                                     }
-                                     div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+Math.sqrt(ec)+'<br>状态：'+q+'<br>图片宽:'+window.getComputedStyle(img,null)['width']+'<br>num:'+num+'<br>屏幕坐标: x:'+pageSco.x+' y'+pageSco.y+'<br>缩放坐标： x：'+centerSco.x+' y:'+centerSco.y;
-                                 } else {
+                                              q = '放大'
+                                          } else if (c > ec) {//缩小
+                                              c = ec;
+                                              wid = parseFloat(window.getComputedStyle(img, null)['width']);
+                                              img.style.width = wid - parseFloat(num) + 'px';
+                                              img.style.marginLeft = -(wid + parseFloat(num)) / 2 + 'px';
+                                              q = '缩小'
+                                          } else {
+                                              q = '无'
+                                          }
+                                          div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：' + Math.sqrt(ec) + '<br>状态：' + q + '<br>图片宽:' + window.getComputedStyle(img, null)['width'] + '<br>num:' + num + '<br>屏幕坐标: x:' + pageSco.x + ' y' + pageSco.y + '<br>缩放坐标： x：' + centerSco.x + ' y:' + centerSco.y;
+                                      } else {
 
-                                 }
-                             }
+                                      }
+                                  }
         );
         document.addEventListener('touchend', function (e) {
-                                      div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+0+'<br>初始间距：'+c+'<br>状态：'+q+'<br>图片宽:'+window.getComputedStyle(img,null)['width']+'<br>num:'+num+'<br>屏幕坐标: x:'+pageSco.x+' y'+pageSco.y+'<br>缩放坐标： x：'+centerSco.x+' y:'+centerSco.y;;
-                                       c=0;
+//                                      div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+0+'<br>初始间距：'+c+'<br>图片宽:'+window.getComputedStyle(img,null)['width']+'<br>num:'+num+'<br>屏幕坐标: x:'+pageSco.x+' y'+pageSco.y+'<br>缩放坐标： x：'+centerSco.x+' y:'+centerSco.y;;
+                                      c = 0;
 
-        }
+                                  }
         )
+
+
+    }
+    var ClickNum = 0;
+    img.onclick = function (e) {
+        e.preventDefault();
+        ClickNum = ClickNum + 1;
+        var timer = setTimeout(callBack, 300);
+    }
+    function callBack() {
+        if (ClickNum == 2) {
+            console.log('dblclick');
+            var a = img.style.width;
+            if (a === '640px') {
+                move_tar=img;
+                console.log(getCss(move_tar, 'width'))
+                targetObj = {width: '353',marginLeft:'-176.5',marginTop:'-110'};
+                move();
+
+                bool=false;
+            } else  {
+                move_tar=img;
+                console.log(getCss(move_tar, 'width'))
+                targetObj = {width: '640',marginLeft:'-320',marginTop:'-200'};
+                move();
+                bool=true;
+            }
+
+        } else if (ClickNum == 1) {
+            console.log('click');
+        }
+        ClickNum = 0;
     }
 
+var duration = 300,
+        time = 0,targetObj = {},
+        changeObj = {},
+        beginObj = {},timer,move_tar;
+    function move() {
+        for (var key in targetObj) {
+            if (targetObj.hasOwnProperty(key)) {
+                beginObj[key] = getCss(move_tar, key);
+                changeObj[key] = targetObj[key] - beginObj[key];
+            }
+        }
+        window.clearTimeout(timer);
 
+        time += 10;
+        if (time >= duration) {
+            for (var key in targetObj) {
+                if (targetObj.hasOwnProperty(key)) {
+                    setCss(move_tar, key, targetObj[key]);
+                }
+            }
+            time = 0;
+            return;
+        }
+        for (key in targetObj) {
+            if (targetObj.hasOwnProperty(key)) {
+                var curPos = linear(time, beginObj[key], changeObj[key], duration);
+                setCss(move_tar, key, curPos);
+            }
+        }
+
+        timer = window.setTimeout(move, 10);
+    }
 </script>
