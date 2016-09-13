@@ -258,7 +258,7 @@ var startLeft,startTop,curL,curT,Left,Top;
                                       } else if(e.touches.length === 1) {
                                           e.preventDefault();
                                           ClickNum = ClickNum + 1;
-                                          var timer = setTimeout(callBack, 300);
+                                          var timer = setTimeout('callBack()', 300);
                                           if(bool) {
                                               startLeft = e.targetTouches[0].pageX;
                                               startTop = e.targetTouches[0].pageY;
