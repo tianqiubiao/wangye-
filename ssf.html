@@ -21,6 +21,17 @@
     </script>
     <link rel="stylesheet" href="public/stylesheets/app.css">
     <title>Title</title>
+    <style>
+        /*#box,#aImg {*/
+                /*position: absolute;*/
+                /*left: 100px;*/
+                /*top: 100px;*/
+                /*width: 100px;*/
+                /*height: 100px;*/
+                /*background: #FF6500;*/
+                /*cursor: move;*/
+        /*}*/
+    </style>
 </head>
 <body style="overflow-x: hidden">
 <div class="min-height100 bgG2 height100">
@@ -29,11 +40,191 @@
 </div>
 
 <select style="width: 100%;position: fixed;top: 0;color: #fff;" class="bgG2" id="scl"></select>
+<div class="box" id="box"></div>
 </body>
 </html>
 <script src="public/javascripts/app.js"></script>
+<script src="public/javascripts/addEvent.js"></script>
 <script>
-    var img = query('#aImg'), div = query('#aDiv'), x, y, x1, y1, c, scl = query('#scl'), num = 1, str,bool=false;
+    //t:时间  b:开始位置  c:目标位置  d：时间
+    var effect = {
+        //匀速
+        Linear: function (t, b, c, d) {
+            return c * t / d + b;
+        },
+        //指数衰减的反弹缓动
+        Bounce: {
+            easeIn: function (t, b, c, d) {
+                return c - effect.Bounce.easeOut(d - t, 0, c, d) + b;
+            },
+            easeOut: function (t, b, c, d) {
+                if ((t /= d) < (1 / 2.75)) {
+                    return c * (7.5625 * t * t) + b;
+                } else if (t < (2 / 2.75)) {
+                    return c * (7.5625 * (t -= (1.5 / 2.75)) * t + .75) + b;
+                } else if (t < (2.5 / 2.75)) {
+                    return c * (7.5625 * (t -= (2.25 / 2.75)) * t + .9375) + b;
+                } else {
+                    return c * (7.5625 * (t -= (2.625 / 2.75)) * t + .984375) + b;
+                }
+            },
+            easeInOut: function (t, b, c, d) {
+                if (t < d / 2) {
+                    return effect.Bounce.easeIn(t * 2, 0, c, d) * .5 + b;
+                }
+                return effect.Bounce.easeOut(t * 2 - d, 0, c, d) * .5 + c * .5 + b;
+            }
+        },
+        //二次方的缓动
+        Quad: {
+            easeIn: function (t, b, c, d) {
+                return c * (t /= d) * t + b;
+            },
+            easeOut: function (t, b, c, d) {
+                return -c * (t /= d) * (t - 2) + b;
+            },
+            easeInOut: function (t, b, c, d) {
+                if ((t /= d / 2) < 1) {
+                    return c / 2 * t * t + b;
+                }
+                return -c / 2 * ((--t) * (t - 2) - 1) + b;
+            }
+        },
+        //三次方的缓动
+        Cubic: {
+            easeIn: function (t, b, c, d) {
+                return c * (t /= d) * t * t + b;
+            },
+            easeOut: function (t, b, c, d) {
+                return c * ((t = t / d - 1) * t * t + 1) + b;
+            },
+            easeInOut: function (t, b, c, d) {
+                if ((t /= d / 2) < 1) {
+                    return c / 2 * t * t * t + b;
+                }
+                return c / 2 * ((t -= 2) * t * t + 2) + b;
+            }
+        },
+        //四次方的缓动
+        Quart: {
+            easeIn: function (t, b, c, d) {
+                return c * (t /= d) * t * t * t + b;
+            },
+            easeOut: function (t, b, c, d) {
+                return -c * ((t = t / d - 1) * t * t * t - 1) + b;
+            },
+            easeInOut: function (t, b, c, d) {
+                if ((t /= d / 2) < 1) {
+                    return c / 2 * t * t * t * t + b;
+                }
+                return -c / 2 * ((t -= 2) * t * t * t - 2) + b;
+            }
+        },
+        //五次方的缓动
+        Quint: {
+            easeIn: function (t, b, c, d) {
+                return c * (t /= d) * t * t * t * t + b;
+            },
+            easeOut: function (t, b, c, d) {
+                return c * ((t = t / d - 1) * t * t * t * t + 1) + b;
+            },
+            easeInOut: function (t, b, c, d) {
+                if ((t /= d / 2) < 1) {
+                    return c / 2 * t * t * t * t * t + b;
+                }
+                return c / 2 * ((t -= 2) * t * t * t * t + 2) + b;
+            }
+        },
+        //正弦曲线的缓动
+        Sine: {
+            easeIn: function (t, b, c, d) {
+                return -c * Math.cos(t / d * (Math.PI / 2)) + c + b;
+            },
+            easeOut: function (t, b, c, d) {
+                return c * Math.sin(t / d * (Math.PI / 2)) + b;
+            },
+            easeInOut: function (t, b, c, d) {
+                return -c / 2 * (Math.cos(Math.PI * t / d) - 1) + b;
+            }
+        },
+        //指数曲线的缓动
+        Expo: {
+            easeIn: function (t, b, c, d) {
+                return (t == 0) ? b : c * Math.pow(2, 10 * (t / d - 1)) + b;
+            },
+            easeOut: function (t, b, c, d) {
+                return (t == d) ? b + c : c * (-Math.pow(2, -10 * t / d) + 1) + b;
+            },
+            easeInOut: function (t, b, c, d) {
+                if (t == 0) return b;
+                if (t == d) return b + c;
+                if ((t /= d / 2) < 1) return c / 2 * Math.pow(2, 10 * (t - 1)) + b;
+                return c / 2 * (-Math.pow(2, -10 * --t) + 2) + b;
+            }
+        },
+        //圆形曲线的缓动
+        Circ: {
+            easeIn: function (t, b, c, d) {
+                return -c * (Math.sqrt(1 - (t /= d) * t) - 1) + b;
+            },
+            easeOut: function (t, b, c, d) {
+                return c * Math.sqrt(1 - (t = t / d - 1) * t) + b;
+            },
+            easeInOut: function (t, b, c, d) {
+                if ((t /= d / 2) < 1) {
+                    return -c / 2 * (Math.sqrt(1 - t * t) - 1) + b;
+                }
+                return c / 2 * (Math.sqrt(1 - (t -= 2) * t) + 1) + b;
+            }
+        },
+        //超过范围的三次方缓动
+        Back: {
+            easeIn: function (t, b, c, d, s) {
+                if (s == undefined) s = 1.70158;
+                return c * (t /= d) * t * ((s + 1) * t - s) + b;
+            },
+            easeOut: function (t, b, c, d, s) {
+                if (s == undefined) s = 1.70158;
+                return c * ((t = t / d - 1) * t * ((s + 1) * t + s) + 1) + b;
+            },
+            easeInOut: function (t, b, c, d, s) {
+                if (s == undefined) s = 1.70158;
+                if ((t /= d / 2) < 1) {
+                    return c / 2 * (t * t * (((s *= (1.525)) + 1) * t - s)) + b;
+                }
+                return c / 2 * ((t -= 2) * t * (((s *= (1.525)) + 1) * t + s) + 2) + b;
+            }
+        },
+        //指数衰减的正弦曲线缓动
+        Elastic: {
+            easeIn: function (t, b, c, d, a, p) {
+                if (t == 0) return b;
+                if ((t /= d) == 1) return b + c;
+                if (!p) p = d * .3;
+                var s;
+                !a || a < Math.abs(c) ? (a = c, s = p / 4) : s = p / (2 * Math.PI) * Math.asin(c / a);
+                return -(a * Math.pow(2, 10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p)) + b;
+            },
+            easeOut: function (t, b, c, d, a, p) {
+                if (t == 0) return b;
+                if ((t /= d) == 1) return b + c;
+                if (!p) p = d * .3;
+                var s;
+                !a || a < Math.abs(c) ? (a = c, s = p / 4) : s = p / (2 * Math.PI) * Math.asin(c / a);
+                return (a * Math.pow(2, -10 * t) * Math.sin((t * d - s) * (2 * Math.PI) / p) + c + b);
+            },
+            easeInOut: function (t, b, c, d, a, p) {
+                if (t == 0) return b;
+                if ((t /= d / 2) == 2) return b + c;
+                if (!p) p = d * (.3 * 1.5);
+                var s;
+                !a || a < Math.abs(c) ? (a = c, s = p / 4) : s = p / (2 * Math.PI) * Math.asin(c / a);
+                if (t < 1) return -.5 * (a * Math.pow(2, 10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p)) + b;
+                return a * Math.pow(2, -10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p) * .5 + c + b;
+            }
+        }
+    };
+    var img = query('#aImg'), div = query('#aDiv'), x, y, x1, y1, c, scl = query('#scl'), num = 1, str,bool=false,box=query('#box');
     //缩放中心点;屏幕中心点
     var centerSco, pageSco;
     //屏幕宽度；
@@ -66,11 +257,18 @@ var startLeft,startTop,curL,curT,Left,Top;
 //                                          div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：' + Math.sqrt(c) + '<br>初始间距：' + Math.sqrt(c) + '<br>num:' + num + '<br>屏幕坐标: x:' + pageSco.x + ' y' + pageSco.y + '<br>缩放坐标： x：' + centerSco.x + ' y:' + centerSco.y;
 
                                       } else if(e.touches.length === 1) {
-                                          startLeft = e.targetTouches[0].pageX;
-                                          startTop = e.targetTouches[0].pageY;
-                                          Left = getCss(img, 'left');
-                                          Top = getCss(img, 'top');
+                                          e.preventDefault();
+                                          ClickNum = ClickNum + 1;
+                                          var timer = setTimeout(callBack, 300);
+                                          if(bool) {
+                                              startLeft = e.targetTouches[0].pageX;
+                                              startTop = e.targetTouches[0].pageY;
+                                              Left = getCss(img, 'left');
+                                              Top = getCss(img, 'top');
 //                                          console.log(Left+','+Top)
+                                          }
+                                          else {
+                                          }
                                       }
                                   }
         );
@@ -125,66 +323,176 @@ var startLeft,startTop,curL,curT,Left,Top;
         )
 
 
-    }
+    };
     var ClickNum = 0;
-    img.onclick = function (e) {
-        e.preventDefault();
-        ClickNum = ClickNum + 1;
-        var timer = setTimeout(callBack, 300);
-    }
+//    img.onclick = function (e) {
+//        e.preventDefault();
+//        ClickNum = ClickNum + 1;
+//        var timer = setTimeout(callBack, 300);
+//    }\
+
+    //双击放大
     function callBack() {
         if (ClickNum == 2) {
             console.log('dblclick');
             var a = img.style.width;
             if (a === '640px') {
-                move_tar=img;
-                targetObj = {width: '353',marginLeft:'-176.5',marginTop:'-110',left:160,top:284};
-                move();
-
+                anim(img,{width: '353',marginLeft:'-176.5',marginTop:'-110',left:160,top:284})
                 bool=false;
             } else  {
-                move_tar=img;
-                targetObj = {width: '640',marginLeft:'-320',marginTop:'-200',left:160,top:284};
-                move();
+                anim(img,{width: '640',marginLeft:'-320',marginTop:'-200',left:160,top:284})
                 bool=true;
             }
-
         } else if (ClickNum == 1) {
             console.log('click');
         }
         ClickNum = 0;
     }
-
-var duration = 300,
-        time = 0,targetObj = {},
-        changeObj = {},
-        beginObj = {},timer,move_tar;
-    function move() {
-        for (var key in targetObj) {
-            if (targetObj.hasOwnProperty(key)) {
-                beginObj[key] = getCss(move_tar, key);
-                changeObj[key] = targetObj[key] - beginObj[key];
-            }
-        }
-        window.clearTimeout(timer);
-
-        time += 10;
-        if (time >= duration) {
-            for (var key in targetObj) {
-                if (targetObj.hasOwnProperty(key)) {
-                    setCss(move_tar, key, targetObj[key]);
-                }
-            }
-            time = 0;
+    function anim(ele,a) {
+        if(  Object.prototype.toString.call(a)==='[object Object]'){
+            var targetObj = a, move_tar=ele,changeObj = {},beginObj = {},duration = 300,time = 0,timer;
+            move();
+        }else{
+            console.log('参数错误！！！');
             return;
         }
-        for (key in targetObj) {
-            if (targetObj.hasOwnProperty(key)) {
-                var curPos = linear(time, beginObj[key], changeObj[key], duration);
-                setCss(move_tar, key, curPos);
+        function linear(t, b, c, d) {
+            return c * t / d + b;
+        }
+        function move() {
+            for (var key in targetObj) {
+                if (targetObj.hasOwnProperty(key)) {
+                    beginObj[key] = getCss(move_tar, key);
+                    changeObj[key] = targetObj[key] - beginObj[key];
+                }
             }
+            window.clearTimeout(timer);
+
+            time += 10;
+            if (time >= duration) {
+                for (var key in targetObj) {
+                    if (targetObj.hasOwnProperty(key)) {
+                        setCss(move_tar, key, targetObj[key]);
+                    }
+                }
+                time = 0;
+                return;
+            }
+            for (key in targetObj) {
+                if (targetObj.hasOwnProperty(key)) {
+                    var curPos =effect.Sine.easeIn(time, beginObj[key], changeObj[key], duration);
+                    setCss(move_tar, key, curPos);
+                }
+            }
+
+            timer = window.setTimeout(move, 10);
+        }
+    }
+
+
+
+
+//    AddEvent.on(img, "touchstart", down);
+//    AddEvent.on(box, "touchstart", down);
+    function down(e) {
+        this["strX"] = e.targetTouches[0].pageX;
+        this["strY"] = e.targetTouches[0].pageY;
+        this["strL"] = this.offsetLeft;
+        this["strT"] = this.offsetTop;
+
+        if (this.setCapture) {
+            this.setCapture();
+            AddEvent.on(this, 'touchmove', move);
+            AddEvent.on(this, 'touchend', up);
+        } else {
+            var _this = this;
+            this.MOVE = function (e) {
+                move.call(_this, e);
+            };
+            this.UP = function (e) {
+                up.call(_this, e);
+            };
+            AddEvent.on(document, 'touchmove', this.MOVE);
+            AddEvent.on(document, 'touchend', this.UP);
         }
 
-        timer = window.setTimeout(move, 10);
+        window.clearInterval(this.flyTimer);
+        window.clearInterval(this.dropTimer);
     }
+    function move(e) {
+        var curL = e.targetTouches[0].pageX - this["strX"] + this["strL"];
+        var curT = e.targetTouches[0].pageY - this["strY"] + this["strT"];
+        var minL = 0, minT = 0, maxL = (document.documentElement.clientWidth || document.body.clientWidth) - this.offsetWidth, maxT = (document.documentElement.clientHeight || document.body.clientHeight) - this.offsetHeight;
+        curL = curL <= minL ? minL : (curL >= maxL ? maxL : curL);
+        curT = curT <= minT ? minT : (curT >= maxT ? maxT : curT);
+        this.style.left = curL + "px";
+        this.style.top = curT + "px";
+
+        if (!this.pre) {
+            this.pre = this.offsetLeft;
+        } else {
+            this.speedFly = this.offsetLeft - this.pre;
+            this.pre = this.offsetLeft;
+        }
+    }
+    function up(e) {
+        if (this.releaseCapture) {
+            this.releaseCapture();
+            AddEvent.off(this, 'touchmove', move);
+            AddEvent.off(this, "touchend", up);
+        } else {
+            AddEvent.off(document, 'touchmove', this.MOVE);
+            AddEvent.off(document, 'touchend', this.UP);
+        }
+        fly.call(this);
+        drop.call(this);
+    }
+    function fly() {
+        var _this = this;
+        _this.flyTimer = window.setInterval(function () {
+            if (Math.abs(_this.speedFly) < 0.5) {
+                window.clearInterval(_this.flyTimer);
+                return;
+            }
+
+            _this.speedFly *= 0.98;
+            var curL = _this.offsetLeft + _this.speedFly;
+            var minL = 0, maxL = (document.documentElement.clientWidth || document.body.clientWidth) - _this.offsetWidth;
+            if (curL >= maxL) {
+                _this.style.left = maxL + "px";
+                _this.speedFly *= -1;
+            } else if (curL <= minL) {
+                _this.style.left = minL + "px";
+                _this.speedFly *= -1;
+            } else {
+                _this.style.left = curL + "px";
+            }
+        }, 10);
+    }
+    function drop() {
+        var _this = this;
+        _this.dragFlag = 0;
+        _this.dropTimer = window.setInterval(function () {
+            if (_this.dragFlag > 1) {
+                window.clearInterval(_this.dropTimer);
+                return;
+            }
+
+            _this.dropSpeed = !_this.dropSpeed ? 10 : _this.dropSpeed + 10;
+            _this.dropSpeed *= 0.98;
+
+            var curT = _this.offsetTop + _this.dropSpeed;
+            var maxT = (document.documentElement.clientHeight || document.body.clientHeight) - _this.offsetHeight;
+            if (curT >= maxT) {//->到底了
+                _this.style.top = maxT + "px";
+                _this.dropSpeed *= -1;
+                _this.dragFlag++;
+            } else {
+                _this.style.top = curT + "px";
+                _this.dragFlag = 0;
+            }
+        }, 10);
+    }
+
+
 </script>
