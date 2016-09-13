@@ -65,7 +65,7 @@ var startLeft,startTop,curL,curT,Left,Top;
                                           centerSco = {x: sb / 2, y: sa / 2};
 //                                          div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：' + Math.sqrt(c) + '<br>初始间距：' + Math.sqrt(c) + '<br>num:' + num + '<br>屏幕坐标: x:' + pageSco.x + ' y' + pageSco.y + '<br>缩放坐标： x：' + centerSco.x + ' y:' + centerSco.y;
 
-                                      } else {
+                                      } else if(e.touches.length === 1) {
                                           startLeft = e.targetTouches[0].pageX;
                                           startTop = e.targetTouches[0].pageY;
                                           Left = getCss(img, 'left');
@@ -105,7 +105,7 @@ var startLeft,startTop,curL,curT,Left,Top;
                                               q = '无'
                                           }
 //                                          div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：' + Math.sqrt(ec) + '<br>状态：' + q + '<br>图片宽:' + window.getComputedStyle(img, null)['width'] + '<br>num:' + num + '<br>屏幕坐标: x:' + pageSco.x + ' y' + pageSco.y + '<br>缩放坐标： x：' + centerSco.x + ' y:' + centerSco.y;
-                                      } else if(bool) {
+                                      } else if(bool &&e.touches.length === 1) {
 //                                          e.preventDefault();
                                           var endLeft = e.targetTouches[0].pageX;
                                           var endTop = e.targetTouches[0].pageY;
