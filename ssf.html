@@ -25,7 +25,7 @@
 <body style="overflow-x: hidden">
 <div class="min-height100 bgG2 height100">
     <div class="colorWhite font20 line_height30" id="aDiv"></div>
-    <div class="relative height100 hidden" ><img src="public/images/b2.jpg" alt="" id="aImg" style="position: absolute;left:50%;;top: 50%;margin-left: -176.5px;margin-top: -110px"></div>
+    <div class="relative height100 hidden" ><img src="public/images/b2.jpg" alt="" id="aImg" style="position: absolute;left:160px;;top: 284px;margin-left: -176.5px;margin-top: -110px"></div>
 </div>
 
 <select style="width: 100%;position: fixed;top: 0;color: #fff;" class="bgG2" id="scl"></select>
@@ -63,19 +63,19 @@ var startLeft,startTop,curL,curT,Left,Top;
                                           sa = y > y1 ? y - y1 : y1 - y;
                                           c = sb * sb + sa * sa;
                                           centerSco = {x: sb / 2, y: sa / 2};
-                                          div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：' + Math.sqrt(c) + '<br>初始间距：' + Math.sqrt(c) + '<br>num:' + num + '<br>屏幕坐标: x:' + pageSco.x + ' y' + pageSco.y + '<br>缩放坐标： x：' + centerSco.x + ' y:' + centerSco.y;
+//                                          div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：' + Math.sqrt(c) + '<br>初始间距：' + Math.sqrt(c) + '<br>num:' + num + '<br>屏幕坐标: x:' + pageSco.x + ' y' + pageSco.y + '<br>缩放坐标： x：' + centerSco.x + ' y:' + centerSco.y;
 
                                       } else {
                                           startLeft = e.targetTouches[0].pageX;
                                           startTop = e.targetTouches[0].pageY;
                                           Left = getCss(img, 'left');
                                           Top = getCss(img, 'top');
-                                          console.log(Left+','+Top)
+//                                          console.log(Left+','+Top)
                                       }
                                   }
         );
         document.addEventListener('touchmove', function (e) {
-//                                 e.preventDefault();
+                                 e.preventDefault();
                                       if (e.touches.length === 2) {
                                           bool=true;
                                           var t, f, t1, f1, a, b, ea, eb, ec;
@@ -104,7 +104,7 @@ var startLeft,startTop,curL,curT,Left,Top;
                                           } else {
                                               q = '无'
                                           }
-                                          div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：' + Math.sqrt(ec) + '<br>状态：' + q + '<br>图片宽:' + window.getComputedStyle(img, null)['width'] + '<br>num:' + num + '<br>屏幕坐标: x:' + pageSco.x + ' y' + pageSco.y + '<br>缩放坐标： x：' + centerSco.x + ' y:' + centerSco.y;
+//                                          div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：' + Math.sqrt(ec) + '<br>状态：' + q + '<br>图片宽:' + window.getComputedStyle(img, null)['width'] + '<br>num:' + num + '<br>屏幕坐标: x:' + pageSco.x + ' y' + pageSco.y + '<br>缩放坐标： x：' + centerSco.x + ' y:' + centerSco.y;
                                       } else if(bool) {
 //                                          e.preventDefault();
                                           var endLeft = e.targetTouches[0].pageX;
@@ -138,15 +138,13 @@ var startLeft,startTop,curL,curT,Left,Top;
             var a = img.style.width;
             if (a === '640px') {
                 move_tar=img;
-                console.log(getCss(move_tar, 'width'))
-                targetObj = {width: '353',marginLeft:'-176.5',marginTop:'-110'};
+                targetObj = {width: '353',marginLeft:'-176.5',marginTop:'-110',left:160,top:284};
                 move();
 
                 bool=false;
             } else  {
                 move_tar=img;
-                console.log(getCss(move_tar, 'width'))
-                targetObj = {width: '640',marginLeft:'-320',marginTop:'-200'};
+                targetObj = {width: '640',marginLeft:'-320',marginTop:'-200',left:160,top:284};
                 move();
                 bool=true;
             }
