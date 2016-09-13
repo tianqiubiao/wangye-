@@ -94,6 +94,7 @@
                                          c=ec;
                                           wid=parseFloat(window.getComputedStyle(img,null)['width']);
                                          img.style.width=wid-parseFloat(num)+'px';
+                                         img.style.left=-(wid+parseFloat(num))/2 +'px';
                                          q='缩小'
                                      }else {
                                          q='无'
