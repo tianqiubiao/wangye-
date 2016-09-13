@@ -58,7 +58,7 @@
                                      sb= x>x1?x-x1:x1-x;
                                      sa= y>y1?y-y1:y1-y;
                                      c=sb*sb+sa*sa;
-                                     div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+Math.sqrt(c)+'<br>初始间距：'+Math.sqrt(c);
+                                     div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+Math.sqrt(c)+'<br>初始间距：'+Math.sqrt(c)+'<br>num:'+num;
 
                                  } else {
 //                startLeft = e.targetTouches[0].pageX;
@@ -83,17 +83,17 @@
                                      if(ec>c){//放大
                                         c=ec;
                                           wid=parseFloat( window.getComputedStyle(img,null)['width']);
-                                         img.style.width=wid+num +'px';
+                                         img.style.width=wid+parseFloat(num) +'px';
                                          q='放大'
                                      }else if(c>ec){//缩小
                                          c=ec;
                                           wid=parseFloat(window.getComputedStyle(img,null)['width']);
-                                         img.style.width=wid-num+'px';
+                                         img.style.width=wid-parseFloat(num)+'px';
                                          q='缩小'
                                      }else {
 q='无'
                                      }
-                                     div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+Math.sqrt(ec)+'<br>状态：'+q+'<br>图片宽'+window.getComputedStyle(img,null)['width'];
+                                     div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+Math.sqrt(ec)+'<br>状态：'+q+'<br>图片宽:'+window.getComputedStyle(img,null)['width']+'<br>num:'+num;
                                  } else {
 //                                     var wi=parseFloat(window.getComputedStyle(img,null)['width']);
 //                                     img.style.width=wi+1 +'px';
