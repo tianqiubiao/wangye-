@@ -25,29 +25,33 @@
 <body>
 <div class="min-height100 bgG2 padTop25">
     <div style="height: 1.5rem;" class="colorWhite font20 line_height30" id="aDiv" ></div>
-    <div><img src="public/images/b2.jpg" alt="" id="aImg"></div>
+    <div><img src="public/images/b2.jpg" alt="" id="aImg" style="position: relative;left:0px;"></div>
 </div>
 
-<select style="width: 100%;position: fixed;top: 0;" id="scl">
-    <option value="1">1</option>
-    <option  value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-</select>
+<select style="width: 100%;position: fixed;top: 0;" id="scl"></select>
 </body>
 </html>
 <script src="public/javascripts/app.js"></script>
 <script>
-    var img = query('#aImg'), div = query('#aDiv'), x, y, x1, y1, c,scl = query('#scl'),num=1;
+    var img = query('#aImg'), div = query('#aDiv'), x, y, x1, y1, c,scl = query('#scl'),num= 1,str;
+    //缩放中心点;屏幕中心点
+    var centerSco,pageSco;
+    //屏幕宽度；
+    var winW=document.documentElement.clientWidth||document.body.clientWidth;
+    var winH=document.documentElement.clientHeight||document.body.clientHeight;
+//    pageSco=(winW*winW)+(winH*winH)
+    pageSco={x:winW/2,y:winH/2};
+    for(var i=0;i<20;i++){
+        str+='<option value="'+i+'">'+i+'</option>';
+    }
+    scl.innerHTML=str;
     scl.onchange=function(){
         num=scl.value;
     }
+
     img.onload = function () {
         img.style.maxWidth = '1000%';
-        img.addEventListener('touchstart', function (e) {
-                                 //alert(e.touches.length)
+        document.addEventListener('touchstart', function (e) {
                                  if (e.touches.length === 2) {
                                      var a, b,sb,sc;
                                      y = e.targetTouches[0].pageY;
@@ -58,15 +62,15 @@
                                      sb= x>x1?x-x1:x1-x;
                                      sa= y>y1?y-y1:y1-y;
                                      c=sb*sb+sa*sa;
-                                     div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+Math.sqrt(c)+'<br>初始间距：'+Math.sqrt(c)+'<br>num:'+num;
+                                     centerSco={x:sb/2,y:sa/2}
+                                     div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+Math.sqrt(c)+'<br>初始间距：'+Math.sqrt(c)+'<br>num:'+num+'<br>屏幕坐标: x:'+pageSco.x+' y'+pageSco.y+'<br>缩放坐标： x：'+centerSco.x+' y:'+centerSco.y;
 
                                  } else {
-//                startLeft = e.targetTouches[0].pageX;
-//                left = getCss(dix, 'left');
+
                                  }
                              }
         );
-        img.addEventListener('touchmove', function (e) {
+        document.addEventListener('touchmove', function (e) {
                                  e.preventDefault();
                                  if (e.touches.length === 2) {
                                      var t, f, t1, f1,a, b,ea,eb,ec;
@@ -74,16 +78,17 @@
                                      t1 = e.targetTouches[1].pageY ;
                                      f1 = e.targetTouches[1].pageX;
                                      f = e.targetTouches[0].pageX;
-//放大、缩小值为对立的；
-  //a:y轴  ，b:x轴   c：斜边；
+                                //放大、缩小值为对立的；a:y轴  ，b:x轴   c：斜边；
                                      var q,wid;
                                      ea= t>t1?t-t1:t1-t;
                                      eb= f>f1?f-f1:f1-f;
                                      ec=ea*ea+eb*eb;
                                      if(ec>c){//放大
                                         c=ec;
-                                          wid=parseFloat( window.getComputedStyle(img,null)['width']);
+                                         wid=parseFloat( window.getComputedStyle(img,null)['width']);
                                          img.style.width=wid+parseFloat(num) +'px';
+                                         img.style.left=wid+parseFloat(num) +'px';
+
                                          q='放大'
                                      }else if(c>ec){//缩小
                                          c=ec;
@@ -91,25 +96,19 @@
                                          img.style.width=wid-parseFloat(num)+'px';
                                          q='缩小'
                                      }else {
-q='无'
+                                         q='无'
                                      }
-                                     div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+Math.sqrt(ec)+'<br>状态：'+q+'<br>图片宽:'+window.getComputedStyle(img,null)['width']+'<br>num:'+num;
+                                     div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+Math.sqrt(ec)+'<br>状态：'+q+'<br>图片宽:'+window.getComputedStyle(img,null)['width']+'<br>num:'+num+'<br>屏幕坐标: x:'+pageSco.x+' y'+pageSco.y+'<br>缩放坐标： x：'+centerSco.x+' y:'+centerSco.y;
                                  } else {
-//                                     var wi=parseFloat(window.getComputedStyle(img,null)['width']);
-//                                     img.style.width=wi+1 +'px';
-//                var endLeft = e.targetTouches[0].pageX;
-//                curT = endLeft - startLeft;
-//                dix.style.left = left + curT + 'px'
+
                                  }
                              }
         );
-        img.addEventListener('touchend', function (e) {
-                                      div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+0+'<br>初始间距：'+0;
+        document.addEventListener('touchend', function (e) {
+                                      div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+0+'<br>初始间距：'+c+'<br>状态：'+q+'<br>图片宽:'+window.getComputedStyle(img,null)['width']+'<br>num:'+num+'<br>屏幕坐标: x:'+pageSco.x+' y'+pageSco.y+'<br>缩放坐标： x：'+centerSco.x+' y:'+centerSco.y;;
                                        c=0;
-//            console.log(window.getComputedStyle(img,null)['width']);
-//console.log(img.style.width)
 
-                             }
+        }
         )
     }
 
