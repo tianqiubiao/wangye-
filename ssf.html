@@ -34,7 +34,7 @@
     </style>
 </head>
 <body style="overflow-x: hidden">
-<div class="min-height100 bgG2 height100">
+<div class="min-height100 bgG2 height100" id="bb">
     <div class="colorWhite font20 line_height30" id="aDiv"></div>
     <div class="relative height100 hidden" ><img src="public/images/b2.jpg" alt="" id="aImg" style="position: absolute;left:160px;;top: 284px;margin-left: -176.5px;margin-top: -110px"></div>
 </div>
@@ -226,7 +226,7 @@
             }
         }
     };
-    var img = query('#aImg'), div = query('#aDiv'), x, y, x1, y1, c, scl = query('#scl'), num = 1, str,bool=false,box=query('#box');
+    var img = query('#aImg'), div = query('#aDiv'), x, y, x1, y1, c, scl = query('#scl'), num = 1, str,bool=false,box=query('#box'),bb=query('#bb');
     //缩放中心点;屏幕中心点
     var centerSco, pageSco;
     //屏幕宽度；
@@ -234,14 +234,14 @@
     var winH = document.documentElement.clientHeight || document.body.clientHeight;
     //    pageSco=(winW*winW)+(winH*winH)
     pageSco = {x: winW / 2, y: winH / 2};
-    str+='<select style="width: 100%;position: fixed;top: 0;color: #fff;" class="bgG2" id="scl">'
+//    str+='<select style="width: 100%;position: fixed;top: 0;color: #fff;" class="bgG2" id="scl">'
     scl.onchange = function () {
         num = scl.value;
     }
     img.style.maxWidth = '200%';
     img.onload = function () {
 var startLeft,startTop,curL,curT,Left,Top;
-        document.addEventListener('touchstart', function (e) {
+       bb.addEventListener('touchstart', function (e) {
                                       if (e.touches.length === 2) {
                                           var a, b, sb, sc;
                                           y = e.targetTouches[0].pageY;
@@ -271,7 +271,7 @@ var startLeft,startTop,curL,curT,Left,Top;
                                       }
                                   }
         );
-        document.addEventListener('touchmove', function (e) {
+        bb.addEventListener('touchmove', function (e) {
                                  e.preventDefault();
                                       if (e.touches.length === 2) {
                                           bool=true;
@@ -314,7 +314,7 @@ var startLeft,startTop,curL,curT,Left,Top;
                                       }
                                   }
         );
-        document.addEventListener('touchend', function (e) {
+        bb.addEventListener('touchend', function (e) {
 //                                      div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+0+'<br>初始间距：'+c+'<br>图片宽:'+window.getComputedStyle(img,null)['width']+'<br>num:'+num+'<br>屏幕坐标: x:'+pageSco.x+' y'+pageSco.y+'<br>缩放坐标： x：'+centerSco.x+' y:'+centerSco.y;;
                                       c = 0;
 
