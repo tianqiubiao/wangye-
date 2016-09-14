@@ -23,24 +23,45 @@
     <title>Title</title>
     <style>
         /*#box,#aImg {*/
-                /*position: absolute;*/
-                /*left: 100px;*/
-                /*top: 100px;*/
-                /*width: 100px;*/
-                /*height: 100px;*/
-                /*background: #FF6500;*/
-                /*cursor: move;*/
+        /*position: absolute;*/
+        /*left: 100px;*/
+        /*top: 100px;*/
+        /*width: 100px;*/
+        /*height: 100px;*/
+        /*background: #FF6500;*/
+        /*cursor: move;*/
         /*}*/
     </style>
 </head>
 <body style="overflow-x: hidden">
 <div class="min-height100 bgG2 height100" id="bb">
     <div class="colorWhite font20 line_height30" id="aDiv"></div>
-    <div class="relative height100 hidden" ><img src="public/images/b2.jpg" alt="" id="aImg" style="position: absolute;left:160px;;top: 284px;margin-left: -176.5px;margin-top: -110px"></div>
+    <div class="relative height100 hidden"><img src="public/images/b2.jpg" alt="" id="aImg"
+                                                style="position: absolute;left:160px;;top: 284px;margin-left: -176.5px;margin-top: -110px">
+    </div>
 </div>
 <div style="width: 100%;position: fixed;top: 0;color: #fff;" class="bgG2"></div>
 <select style="width: 100%;position: fixed;top: 0;color: #fff;" class="bgG2" id="scl">
-    <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+    <option value="11">11</option>
+    <option value="12">12</option>
+    <option value="13">13</option>
+    <option value="14">14</option>
+    <option value="15">15</option>
+    <option value="16">16</option>
+    <option value="17">17</option>
+    <option value="18">18</option>
+    <option value="19">19</option>
+    <option value="20">20</option>
 </select>
 <div class="box" id="box"></div>
 </body>
@@ -226,7 +247,7 @@
             }
         }
     };
-    var img = query('#aImg'), div = query('#aDiv'), x, y, x1, y1, c, scl = query('#scl'), num = 1, str,bool=false,box=query('#box'),bb=query('#bb');
+    var img = query('#aImg'), div = query('#aDiv'), x, y, x1, y1, c, scl = query('#scl'), num = 1, str, bool = false, box = query('#box'), bb = query('#bb');
     //缩放中心点;屏幕中心点
     var centerSco, pageSco;
     //屏幕宽度；
@@ -234,113 +255,113 @@
     var winH = document.documentElement.clientHeight || document.body.clientHeight;
     //    pageSco=(winW*winW)+(winH*winH)
     pageSco = {x: winW / 2, y: winH / 2};
-//    str+='<select style="width: 100%;position: fixed;top: 0;color: #fff;" class="bgG2" id="scl">'
+    //    str+='<select style="width: 100%;position: fixed;top: 0;color: #fff;" class="bgG2" id="scl">'
     scl.onchange = function () {
         num = scl.value;
     }
     img.style.maxWidth = '200%';
     img.onload = function () {
-var startLeft,startTop,curL,curT,Left,Top;
-       bb.addEventListener('touchstart', function (e) {
-                                      if (e.touches.length === 2) {
-                                          var a, b, sb, sc;
-                                          y = e.targetTouches[0].pageY;
-                                          x = e.targetTouches[0].pageX;
-                                          y1 = e.targetTouches[1].pageY;
-                                          x1 = e.targetTouches[1].pageX;
-                                          //计算三角两边;
-                                          sb = x > x1 ? x - x1 : x1 - x;
-                                          sa = y > y1 ? y - y1 : y1 - y;
-                                          c = sb * sb + sa * sa;
-                                          centerSco = {x: sb / 2, y: sa / 2};
+        var startLeft, startTop, curL, curT, Left, Top;
+        bb.addEventListener('touchstart', function (e) {
+                                if (e.touches.length === 2) {
+                                    var a, b, sb, sc;
+                                    y = e.targetTouches[0].pageY;
+                                    x = e.targetTouches[0].pageX;
+                                    y1 = e.targetTouches[1].pageY;
+                                    x1 = e.targetTouches[1].pageX;
+                                    //计算三角两边;
+                                    sb = x > x1 ? x - x1 : x1 - x;
+                                    sa = y > y1 ? y - y1 : y1 - y;
+                                    c = sb * sb + sa * sa;
+                                    centerSco = {x: sb / 2, y: sa / 2};
 //                                          div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：' + Math.sqrt(c) + '<br>初始间距：' + Math.sqrt(c) + '<br>num:' + num + '<br>屏幕坐标: x:' + pageSco.x + ' y' + pageSco.y + '<br>缩放坐标： x：' + centerSco.x + ' y:' + centerSco.y;
 
-                                      } else if(e.touches.length === 1) {
-                                          e.preventDefault();
-                                          ClickNum = ClickNum + 1;
-                                          var timer = setTimeout('callBack()', 300);
-                                          if(bool) {
-                                              startLeft = e.targetTouches[0].pageX;
-                                              startTop = e.targetTouches[0].pageY;
-                                              Left = getCss(img, 'left');
-                                              Top = getCss(img, 'top');
+                                } else if (e.touches.length === 1) {
+                                    e.preventDefault();
+                                    ClickNum = ClickNum + 1;
+                                    var timer = setTimeout('callBack()', 300);
+                                    if (bool) {
+                                        startLeft = e.targetTouches[0].pageX;
+                                        startTop = e.targetTouches[0].pageY;
+                                        Left = getCss(img, 'left');
+                                        Top = getCss(img, 'top');
 //                                          console.log(Left+','+Top)
-                                          }
-                                          else {
-                                          }
-                                      }
-                                  }
+                                    }
+                                    else {
+                                    }
+                                }
+                            }
         );
         bb.addEventListener('touchmove', function (e) {
-                                 e.preventDefault();
-                                      if (e.touches.length === 2) {
-                                          bool=true;
-                                          alert('zzz')
-                                          var t, f, t1, f1, a, b, ea, eb, ec;
-                                          t = e.targetTouches[0].pageY;
-                                          t1 = e.targetTouches[1].pageY;
-                                          f1 = e.targetTouches[1].pageX;
-                                          f = e.targetTouches[0].pageX;
-                                          //放大、缩小值为对立的；a:y轴  ，b:x轴   c：斜边；
-                                          var q, wid,scaling,scal ;
-                                          ea = t > t1 ? t - t1 : t1 - t;
-                                          eb = f > f1 ? f - f1 : f1 - f;
-                                          ec = ea * ea + eb * eb;
-                                          centerSco = {x: eb / 2, y: ea / 2};
-                                          if (ec > c) {//放大
-                                              c = ec;
-                                              wid = parseFloat(window.getComputedStyle(img, null)['width']);
-                                              scal =wid + parseFloat(num);
-                                              img.style.width = scaling  + 'px';
-                                              img.style.marginLeft = -(wid + parseFloat(num)) / 2 + 'px';
+                                e.preventDefault();
+                                if (e.touches.length === 2) {
+                                    bool = true;
+                                    var t, f, t1, f1, a, b, ea, eb, ec;
+                                    t = e.targetTouches[0].pageY;
+                                    t1 = e.targetTouches[1].pageY;
+                                    f1 = e.targetTouches[1].pageX;
+                                    f = e.targetTouches[0].pageX;
+                                    //放大、缩小值为对立的；a:y轴  ，b:x轴   c：斜边；
+                                    var q, wid, scaling, scal;
+                                    ea = t > t1 ? t - t1 : t1 - t;
+                                    eb = f > f1 ? f - f1 : f1 - f;
+                                    ec = ea * ea + eb * eb;
+                                    centerSco = {x: eb / 2, y: ea / 2};
+                                    if (ec > c) {//放大
+                                        c = ec;
+                                        wid = parseFloat(window.getComputedStyle(img, null)['width']);
+                                        scal = wid + parseFloat(num);
+                                        img.style.width = scaling + 'px';
+                                        img.style.marginLeft = -(wid + parseFloat(num)) / 2 + 'px';
 //放大百分比
 
-                                              scaling=scal/wid;
+                                        scaling = scal / wid;
 
-                                              q = '放大'
-                                          } else if (c > ec) {//缩小
-                                              c = ec;
-                                              wid = parseFloat(window.getComputedStyle(img, null)['width']);
-                                              scal=wid - parseFloat(num);
-                                              img.style.width = wid - parseFloat(num) + 'px';
-                                              img.style.marginLeft = -(wid + parseFloat(num)) / 2 + 'px';
-                                              scaling=scal/wid;
-                                              q = '缩小'
-                                          } else {
-                                              q = '无'
-                                          }
+                                        q = '放大'
+                                    } else if (c > ec) {//缩小
+                                        c = ec;
+                                        wid = parseFloat(window.getComputedStyle(img, null)['width']);
+                                        scal = wid - parseFloat(num);
+                                        img.style.width = wid - parseFloat(num) + 'px';
+                                        img.style.marginLeft = -(wid + parseFloat(num)) / 2 + 'px';
+                                        scaling = scal / wid;
+                                        q = '缩小'
+                                    } else {
+                                        q = '无'
+                                    }
 
 //                                          div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：' + Math.sqrt(ec) + '<br>状态：' + q + '<br>图片宽:' + window.getComputedStyle(img, null)['width'] + '<br>num:' + num + '<br>屏幕坐标: x:' + pageSco.x + ' y' + pageSco.y + '<br>缩放坐标： x：' + centerSco.x + ' y:' + centerSco.y;
 //                                          div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：' + Math.sqrt(ec) + '<br>状态：' + q + '<br>图片宽:' + window.getComputedStyle(img, null)['width'] + '<br>num:' + num + '<br>屏幕坐标: x:' + pageSco.x + ' y' + pageSco.y + '<br>缩放坐标： x：' + centerSco.x + ' y:' + centerSco.y;
-                                          div.innerHTML = scaling;
-                                      } else if(bool &&e.touches.length === 1) {
+                                    div.innerHTML = scaling;
+                                    return
+                                }
+                                if (bool && e.touches.length === 1) {
 //                                          e.preventDefault();
-                                          alert('yyy')
-                                          var endLeft = e.targetTouches[0].pageX;
-                                          var endTop = e.targetTouches[0].pageY;
-                                          curL = endLeft - startLeft;
-                                          curT = endTop - startTop;
-                                          img.style.left = Left + curL + 'px';
-                                          img.style.top = Top + curT + 'px';
+                                    var endLeft = e.targetTouches[0].pageX;
+                                    var endTop = e.targetTouches[0].pageY;
+                                    curL = endLeft - startLeft;
+                                    curT = endTop - startTop;
+                                    img.style.left = Left + curL + 'px';
+                                    img.style.top = Top + curT + 'px';
 
-                                      }
-                                  }
+                                }
+                            }
         );
         bb.addEventListener('touchend', function (e) {
 //                                      div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：'+0+'<br>初始间距：'+c+'<br>图片宽:'+window.getComputedStyle(img,null)['width']+'<br>num:'+num+'<br>屏幕坐标: x:'+pageSco.x+' y'+pageSco.y+'<br>缩放坐标： x：'+centerSco.x+' y:'+centerSco.y;;
-                                      c = 0;
+                                c = 0;
 
-                                  }
+                            }
         )
 
 
     };
     var ClickNum = 0;
-//    img.onclick = function (e) {
-//        e.preventDefault();
-//        ClickNum = ClickNum + 1;
-//        var timer = setTimeout(callBack, 300);
-//    }\
+    //    img.onclick = function (e) {
+    //        e.preventDefault();
+    //        ClickNum = ClickNum + 1;
+    //        var timer = setTimeout(callBack, 300);
+    //    }\
 
     //双击放大
     function callBack() {
@@ -348,28 +369,29 @@ var startLeft,startTop,curL,curT,Left,Top;
             console.log('dblclick');
             var a = img.style.width;
             if (a === '640px') {
-                anim(img,{width: '353',marginLeft:'-176.5',marginTop:'-110',left:160,top:284})
-                bool=false;
-            } else  {
-                anim(img,{width: '640',marginLeft:'-320',marginTop:'-200',left:160,top:284})
-                bool=true;
+                anim(img, {width: '353', marginLeft: '-176.5', marginTop: '-110', left: 160, top: 284})
+                bool = false;
+            } else {
+                anim(img, {width: '640', marginLeft: '-320', marginTop: '-200', left: 160, top: 284})
+                bool = true;
             }
         } else if (ClickNum == 1) {
             console.log('click');
         }
         ClickNum = 0;
     }
-    function anim(ele,a) {
-        if(  Object.prototype.toString.call(a)==='[object Object]'){
-            var targetObj = a, move_tar=ele,changeObj = {},beginObj = {},duration = 300,time = 0,timer;
+    function anim(ele, a) {
+        if (Object.prototype.toString.call(a) === '[object Object]') {
+            var targetObj = a, move_tar = ele, changeObj = {}, beginObj = {}, duration = 300, time = 0, timer;
             move();
-        }else{
+        } else {
             console.log('参数错误！！！');
             return;
         }
         function linear(t, b, c, d) {
             return c * t / d + b;
         }
+
         function move() {
             for (var key in targetObj) {
                 if (targetObj.hasOwnProperty(key)) {
@@ -391,7 +413,7 @@ var startLeft,startTop,curL,curT,Left,Top;
             }
             for (key in targetObj) {
                 if (targetObj.hasOwnProperty(key)) {
-                    var curPos =effect.Sine.easeIn(time, beginObj[key], changeObj[key], duration);
+                    var curPos = effect.Sine.easeIn(time, beginObj[key], changeObj[key], duration);
                     setCss(move_tar, key, curPos);
                 }
             }
@@ -401,10 +423,8 @@ var startLeft,startTop,curL,curT,Left,Top;
     }
 
 
-
-
-//    AddEvent.on(img, "touchstart", down);
-//    AddEvent.on(box, "touchstart", down);
+    //    AddEvent.on(img, "touchstart", down);
+    //    AddEvent.on(box, "touchstart", down);
     function down(e) {
         this["strX"] = e.targetTouches[0].pageX;
         this["strY"] = e.targetTouches[0].pageY;
@@ -461,48 +481,50 @@ var startLeft,startTop,curL,curT,Left,Top;
     function fly() {
         var _this = this;
         _this.flyTimer = window.setInterval(function () {
-            if (Math.abs(_this.speedFly) < 0.5) {
-                window.clearInterval(_this.flyTimer);
-                return;
-            }
+                                                if (Math.abs(_this.speedFly) < 0.5) {
+                                                    window.clearInterval(_this.flyTimer);
+                                                    return;
+                                                }
 
-            _this.speedFly *= 0.98;
-            var curL = _this.offsetLeft + _this.speedFly;
-            var minL = 0, maxL = (document.documentElement.clientWidth || document.body.clientWidth) - _this.offsetWidth;
-            if (curL >= maxL) {
-                _this.style.left = maxL + "px";
-                _this.speedFly *= -1;
-            } else if (curL <= minL) {
-                _this.style.left = minL + "px";
-                _this.speedFly *= -1;
-            } else {
-                _this.style.left = curL + "px";
-            }
-        }, 10);
+                                                _this.speedFly *= 0.98;
+                                                var curL = _this.offsetLeft + _this.speedFly;
+                                                var minL = 0, maxL = (document.documentElement.clientWidth || document.body.clientWidth) - _this.offsetWidth;
+                                                if (curL >= maxL) {
+                                                    _this.style.left = maxL + "px";
+                                                    _this.speedFly *= -1;
+                                                } else if (curL <= minL) {
+                                                    _this.style.left = minL + "px";
+                                                    _this.speedFly *= -1;
+                                                } else {
+                                                    _this.style.left = curL + "px";
+                                                }
+                                            }, 10
+        );
     }
     function drop() {
         var _this = this;
         _this.dragFlag = 0;
         _this.dropTimer = window.setInterval(function () {
-            if (_this.dragFlag > 1) {
-                window.clearInterval(_this.dropTimer);
-                return;
-            }
+                                                 if (_this.dragFlag > 1) {
+                                                     window.clearInterval(_this.dropTimer);
+                                                     return;
+                                                 }
 
-            _this.dropSpeed = !_this.dropSpeed ? 10 : _this.dropSpeed + 10;
-            _this.dropSpeed *= 0.98;
+                                                 _this.dropSpeed = !_this.dropSpeed ? 10 : _this.dropSpeed + 10;
+                                                 _this.dropSpeed *= 0.98;
 
-            var curT = _this.offsetTop + _this.dropSpeed;
-            var maxT = (document.documentElement.clientHeight || document.body.clientHeight) - _this.offsetHeight;
-            if (curT >= maxT) {//->到底了
-                _this.style.top = maxT + "px";
-                _this.dropSpeed *= -1;
-                _this.dragFlag++;
-            } else {
-                _this.style.top = curT + "px";
-                _this.dragFlag = 0;
-            }
-        }, 10);
+                                                 var curT = _this.offsetTop + _this.dropSpeed;
+                                                 var maxT = (document.documentElement.clientHeight || document.body.clientHeight) - _this.offsetHeight;
+                                                 if (curT >= maxT) {//->到底了
+                                                     _this.style.top = maxT + "px";
+                                                     _this.dropSpeed *= -1;
+                                                     _this.dragFlag++;
+                                                 } else {
+                                                     _this.style.top = curT + "px";
+                                                     _this.dragFlag = 0;
+                                                 }
+                                             }, 10
+        );
     }
 
 
