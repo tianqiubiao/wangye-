@@ -281,27 +281,35 @@ var startLeft,startTop,curL,curT,Left,Top;
                                           f1 = e.targetTouches[1].pageX;
                                           f = e.targetTouches[0].pageX;
                                           //放大、缩小值为对立的；a:y轴  ，b:x轴   c：斜边；
-                                          var q, wid;
+                                          var q, wid,scaling,scal ;
                                           ea = t > t1 ? t - t1 : t1 - t;
                                           eb = f > f1 ? f - f1 : f1 - f;
                                           ec = ea * ea + eb * eb;
+                                          centerSco = {x: eb / 2, y: ea / 2};
                                           if (ec > c) {//放大
                                               c = ec;
                                               wid = parseFloat(window.getComputedStyle(img, null)['width']);
-                                              img.style.width = wid + parseFloat(num) + 'px';
+                                              scal =wid + parseFloat(num);
+                                              img.style.width = scaling  + 'px';
                                               img.style.marginLeft = -(wid + parseFloat(num)) / 2 + 'px';
+//放大百分比
+
+                                              scaling=scal/wid;
 
                                               q = '放大'
                                           } else if (c > ec) {//缩小
                                               c = ec;
                                               wid = parseFloat(window.getComputedStyle(img, null)['width']);
+                                              scal=wid - parseFloat(num);
                                               img.style.width = wid - parseFloat(num) + 'px';
                                               img.style.marginLeft = -(wid + parseFloat(num)) / 2 + 'px';
+                                              scaling=scal/wid;
                                               q = '缩小'
                                           } else {
                                               q = '无'
                                           }
 //                                          div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：' + Math.sqrt(ec) + '<br>状态：' + q + '<br>图片宽:' + window.getComputedStyle(img, null)['width'] + '<br>num:' + num + '<br>屏幕坐标: x:' + pageSco.x + ' y' + pageSco.y + '<br>缩放坐标： x：' + centerSco.x + ' y:' + centerSco.y;
+                                          div.innerHTML = scaling;
                                       } else if(bool &&e.touches.length === 1) {
 //                                          e.preventDefault();
                                           var endLeft = e.targetTouches[0].pageX;
