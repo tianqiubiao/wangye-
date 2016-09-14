@@ -275,6 +275,7 @@ var startLeft,startTop,curL,curT,Left,Top;
                                  e.preventDefault();
                                       if (e.touches.length === 2) {
                                           bool=true;
+                                          alert('zzz')
                                           var t, f, t1, f1, a, b, ea, eb, ec;
                                           t = e.targetTouches[0].pageY;
                                           t1 = e.targetTouches[1].pageY;
@@ -314,6 +315,7 @@ var startLeft,startTop,curL,curT,Left,Top;
                                           div.innerHTML = scaling;
                                       } else if(bool &&e.touches.length === 1) {
 //                                          e.preventDefault();
+                                          alert('yyy')
                                           var endLeft = e.targetTouches[0].pageX;
                                           var endTop = e.targetTouches[0].pageY;
                                           curL = endLeft - startLeft;
