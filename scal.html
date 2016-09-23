@@ -34,7 +34,7 @@
 <script src="public/javascripts/app.js"></script>
 <script>
     //t:时间  b:开始位置  c:目标位置  d：时间
-    var img = query('#aImg'), div = query('#aDiv'), x, y, x1, y1, c,  num = 3, str, bool = false, box = query('#box'), bb = query('#bb');
+    var img = query('#aImg'), div = query('#aDiv'), x, y, x1, y1, c,  num = 3, str, bool = true, box = query('#box'), bb = query('#bb');
     //缩放中心点;屏幕中心点
     var centerSco, pageSco;
     //屏幕宽度；
@@ -59,20 +59,21 @@
                                     c = sb * sb + sa * sa;
                                     centerSco = {x: sb / 2, y: sa / 2};
 
-                                } else if (e.touches.length === 1) {
-                                    e.preventDefault();
-                                    ClickNum = ClickNum + 1;
-                                    var timer = setTimeout('callBack()', 300);
-                                    if (bool) {
-                                        startLeft = e.targetTouches[0].pageX;
-                                        startTop = e.targetTouches[0].pageY;
-                                        Left = getCss(img, 'left');
-                                        Top = getCss(img, 'top');
-//                                          console.log(Left+','+Top)
-                                    }
-                                    else {
-                                    }
                                 }
+//                                else if (e.touches.length === 1) {
+//                                    e.preventDefault();
+//                                    ClickNum = ClickNum + 1;
+//                                    var timer = setTimeout('callBack()', 300);
+//                                    if (bool) {
+//                                        startLeft = e.targetTouches[0].pageX;
+//                                        startTop = e.targetTouches[0].pageY;
+//                                        Left = getCss(img, 'left');
+//                                        Top = getCss(img, 'top');
+////                                          console.log(Left+','+Top)
+//                                    }
+//                                    else {
+//                                    }
+//                                }
                             }
         );
         bb.addEventListener('touchmove', function (e) {
@@ -110,16 +111,16 @@
                                     }
                                     return
                                 }
-                                if (bool && e.touches.length === 1) {
-//                                          e.preventDefault();
-                                    var endLeft = e.targetTouches[0].pageX;
-                                    var endTop = e.targetTouches[0].pageY;
-                                    curL = endLeft - startLeft;
-                                    curT = endTop - startTop;
-                                    img.style.left = Left + curL + 'px';
-                                    img.style.top = Top + curT + 'px';
-
-                                }
+//                                if (bool && e.touches.length === 1) {
+////                                          e.preventDefault();
+//                                    var endLeft = e.targetTouches[0].pageX;
+//                                    var endTop = e.targetTouches[0].pageY;
+//                                    curL = endLeft - startLeft;
+//                                    curT = endTop - startTop;
+//                                    img.style.left = Left + curL + 'px';
+//                                    img.style.top = Top + curT + 'px';
+//
+//                                }
                             }
         );
         bb.addEventListener('touchend', function (e) {
