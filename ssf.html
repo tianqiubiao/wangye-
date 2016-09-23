@@ -274,7 +274,6 @@
                                     sa = y > y1 ? y - y1 : y1 - y;
                                     c = sb * sb + sa * sa;
                                     centerSco = {x: sb / 2, y: sa / 2};
-//                                          div.innerHTML = '手指数：' + e.touches.length + '<br>手指间距：' + Math.sqrt(c) + '<br>初始间距：' + Math.sqrt(c) + '<br>num:' + num + '<br>屏幕坐标: x:' + pageSco.x + ' y' + pageSco.y + '<br>缩放坐标： x：' + centerSco.x + ' y:' + centerSco.y;
 
                                 } else if (e.touches.length === 1) {
                                     e.preventDefault();
@@ -311,7 +310,7 @@
                                         c = ec;
                                         wid = parseFloat(window.getComputedStyle(img, null)['width']);
                                         scal = wid + parseFloat(num);
-                                        img.style.width = scaling + 'px';
+                                        img.style.width = scal + 'px';
                                         img.style.marginLeft = -(wid + parseFloat(num)) / 2 + 'px';
 //放大百分比
 
